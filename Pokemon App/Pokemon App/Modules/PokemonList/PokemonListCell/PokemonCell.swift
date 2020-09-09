@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PokemonListCell: UITableViewCell {
+class PokemonCell: UITableViewCell {
     private let pokemonImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.layer.cornerRadius = 26
@@ -38,9 +38,13 @@ class PokemonListCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupInfos(with pokemon: Pokemon) {
+        pokemonName.text = pokemon.name
+    }
 }
 
-extension PokemonListCell: ViewConfiguration {
+extension PokemonCell: ViewConfiguration {
     func buildViewHierarchy() {
         addSubViews(views: [pokemonImage, pokemonName, nationalDexNumber])
     }
