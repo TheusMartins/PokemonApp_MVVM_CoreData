@@ -13,11 +13,18 @@ final class PokemonListView: UIView {
     var searchTextFieldTop: NSLayoutConstraint?
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Pokemons"
+        label.text = "Select generation"
         label.textColor = .white
-        label.isUserInteractionEnabled = true
         label.font = UIFont.boldSystemFont(ofSize: 28)
         return label
+    }()
+    
+    private let showPickerButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "iconArrowDown")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        return button
     }()
     
     let tableView: UITableView = {
@@ -38,7 +45,7 @@ final class PokemonListView: UIView {
     ) {
         picker = PokemonGenerationPickerView(delegate: pokemonGenerationPickerDelegate)
         super.init(frame: .zero)
-        searchTextFieldTop = tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 50)
+        searchTextFieldTop = tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 60)
         tableView.dataSource = dataSource
         tableView.delegate = delegate
         setupViewConfiguration()
@@ -50,6 +57,11 @@ final class PokemonListView: UIView {
     
     private func registerCells() {
         tableView.register(PokemonCell.self, forCellReuseIdentifier: PokemonCell.reuseIdentifier)
+    }
+    
+    private func setupshowPickerButton() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
+        showPickerButton.addGestureRecognizer(tap)
     }
     
     @objc private func showPicker() {
@@ -64,7 +76,7 @@ final class PokemonListView: UIView {
 
 extension PokemonListView: ViewConfiguration {
     func buildViewHierarchy() {
-        addSubViews(views: [titleLabel, tableView])
+        addSubViews(views: [titleLabel, showPickerButton, tableView])
     }
     
     func setupConstraints() {
@@ -72,6 +84,11 @@ extension PokemonListView: ViewConfiguration {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            
+            showPickerButton.heightAnchor.constraint(equalToConstant: 24),
+            showPickerButton.widthAnchor.constraint(equalToConstant: 24),
+            showPickerButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            showPickerButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 12),
             
             searchTextFieldTop,
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -83,8 +100,7 @@ extension PokemonListView: ViewConfiguration {
     func configureViews() {
         self.backgroundColor = .projectBlack
         registerCells()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
-        titleLabel.addGestureRecognizer(tap)
+        setupshowPickerButton()
     }
 }
 

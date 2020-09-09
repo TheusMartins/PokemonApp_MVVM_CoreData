@@ -53,6 +53,12 @@ class PokemonCell: UITableViewCell {
             }
         }
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pokemonImage.image = nil
+        pokemonImage.hideLoading()
+    }
 }
 
 extension PokemonCell: ViewConfiguration {
