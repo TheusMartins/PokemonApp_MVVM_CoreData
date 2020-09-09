@@ -33,9 +33,20 @@ class PokemonCell: UITableViewCell {
     }
     
     func setupInfos(with pokemon: Pokemon, pokemonIndex: Int) {
+        pokemonImage.image = nil
         pokemonName.text = pokemon.name
         pokemonImage.showLoading()
-        DownloadImage.shared.getPokemonImage(id: "\(pokemonIndex + 1)") { image, _ in
+        let id = pokemon.url.absoluteString.split(whereSeparator: { $0 == "/"}).map(String.init).last
+        DownloadImage.shared.getPokemonImage(id: id!) { image, error in
+            guard let image = image else {
+                DispatchQueue.main.async {
+                    self.pokemonImage.hideLoading()
+                    let imagem = UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate)
+                    self.pokemonImage.image = imagem
+                    self.pokemonImage.tintColor = .white
+                }
+                return
+            }
             DispatchQueue.main.async {
                 self.pokemonImage.hideLoading()
                 self.pokemonImage.image = image

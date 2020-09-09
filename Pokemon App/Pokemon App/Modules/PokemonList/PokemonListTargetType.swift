@@ -7,12 +7,12 @@
 //
 
 enum PokemonListTargetType {
-    case getContacts
+    case getContacts(Int, Int)
 }
 
 extension PokemonListTargetType: TargetType {
     var endpoint: String {
-        return "pokemon?limit=1050&offset=0"
+        return ""
     }
     
     var method: HTTPMethod {
@@ -24,6 +24,11 @@ extension PokemonListTargetType: TargetType {
     }
     
     var parameters: [String : Any]? {
-        return nil
+        switch self {
+        case .getContacts(let limit, let offset): return [
+            "limit" : limit,
+            "offset" : offset
+        ]
+        }
     }
 }

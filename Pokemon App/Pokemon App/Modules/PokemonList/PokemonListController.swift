@@ -11,7 +11,7 @@ import UIKit
 final class PokemonListController: UIViewController {
         private lazy var customView: PokemonListView = PokemonListView(dataSource: self,
                                                                        delegate: self,
-                                                                       searchTextFieldDelegate: self)
+                                                                       pokemonGenerationPickerDelegate: viewModel)
     private let viewModel: PokemonListViewModel
     
     init(viewmodel: PokemonListViewModel = PokemonListViewModel()) {
@@ -29,17 +29,24 @@ final class PokemonListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getPokemons { [weak self] in
-            DispatchQueue.main.async {
-                self?.customView.tableView.reloadData()
-            }
-        }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateTableView),
+            name: NSNotification.Name(rawValue: "Teste"),
+            object: nil
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barStyle = .blackOpaque
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    @objc private func updateTableView() {
+        DispatchQueue.main.async {
+            self.customView.tableView.reloadData()
+        }
     }
 }
 
@@ -65,14 +72,6 @@ extension PokemonListController: UITableViewDataSource, UITableViewDelegate {
             customView.searchTextFieldTop?.constant = 12
         } else {
             customView.searchTextFieldTop?.constant = 75
-        }
-    }
-}
-
-extension PokemonListController: SearchTextFieldDelegate {
-    func textFieldText(_ string: String) {
-        viewModel.getListFiltered(with: string) { [weak self] in
-            self?.customView.tableView.reloadData()
         }
     }
 }

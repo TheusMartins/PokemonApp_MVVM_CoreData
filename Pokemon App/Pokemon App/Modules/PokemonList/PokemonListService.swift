@@ -7,7 +7,7 @@
 //
 
 protocol PokemonListService {
-    func getPokemons(completion: @escaping (PokemonListModel?, Error?) -> Void)
+    func getPokemons(limit: Int, offset: Int, completion: @escaping (PokemonListModel?, Error?) -> Void)
 }
 
 class PokemonListServiceImpl: PokemonListService {
@@ -19,8 +19,8 @@ class PokemonListServiceImpl: PokemonListService {
         self.provider = provider
     }
     
-    func getPokemons(completion: @escaping (PokemonListModel?, Error?) -> Void) {
-        provider.requestObject(model: PokemonListModel.self, .getContacts) { modelList, error in
+    func getPokemons(limit: Int, offset: Int, completion: @escaping (PokemonListModel?, Error?) -> Void) {
+        provider.requestObject(model: PokemonListModel.self, .getContacts(limit, offset)) { modelList, error in
             if let error = error {
                 completion(nil, error)
             } else {

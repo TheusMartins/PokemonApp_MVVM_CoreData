@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7217E323-0D17-4BE5-B1C3-0EF54494E594"
+            uuid = "94DFB2B0-6494-40A2-A5F2-E8F207839838"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pokemon app/Network/RequestProtocol.swift"
+            filePath = "Pokemon app/Network/DownloadImage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "requestArray(model:_:completionHandler:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "getPokemonImage(id:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

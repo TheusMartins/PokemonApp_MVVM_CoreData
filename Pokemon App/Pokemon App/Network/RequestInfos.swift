@@ -31,6 +31,6 @@ public protocol TargetType {
 
 public extension TargetType {
     var baseURL: URL {
-        return URL(string: "https://pokeapi.co/api/v2/")!
+        return URL(string: "https://pokeapi.co/api/v2/pokemon/")!
     }
 }

@@ -10,7 +10,6 @@ import UIKit
 
 extension UIImageView {
     func showLoading() {
-        image = nil
         let activityIndicator = UIActivityIndicatorView(style: .white)
         self.addSubViews(views: [activityIndicator])
         NSLayoutConstraint.activate([
