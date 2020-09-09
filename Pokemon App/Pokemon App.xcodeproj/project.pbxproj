@@ -93,8 +93,8 @@
 			children = (
 				7E1F1B8D25093EFE004FBB00 /* AppDelegate.swift */,
 				7E1F1BB9250945C7004FBB00 /* Network */,
-				7E1F1BB825094599004FBB00 /* Modules */,
 				7E1F1BBE250947A3004FBB00 /* Extensions */,
+				7E1F1BB825094599004FBB00 /* Modules */,
 				7E1F1B9925093F01004FBB00 /* Assets.xcassets */,
 				7E1F1B9B25093F01004FBB00 /* LaunchScreen.storyboard */,
 				7E1F1B9E25093F01004FBB00 /* Info.plist */,
