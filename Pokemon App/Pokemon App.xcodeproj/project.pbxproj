@@ -26,6 +26,8 @@
 		7E1F1BCF2509514C004FBB00 /* PokemonListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BCE2509514C004FBB00 /* PokemonListService.swift */; };
 		7E1F1BD12509525A004FBB00 /* PokemonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BD02509525A004FBB00 /* PokemonListView.swift */; };
 		7E1F1BD3250952A8004FBB00 /* PokemonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BD2250952A8004FBB00 /* PokemonListViewModel.swift */; };
+		7E1F1BD5250957A9004FBB00 /* DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BD4250957A9004FBB00 /* DownloadImage.swift */; };
+		7EF8ADB1250963ED00118F44 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF8ADB0250963ED00118F44 /* UIImageViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		7E1F1BCE2509514C004FBB00 /* PokemonListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListService.swift; sourceTree = "<group>"; };
 		7E1F1BD02509525A004FBB00 /* PokemonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListView.swift; sourceTree = "<group>"; };
 		7E1F1BD2250952A8004FBB00 /* PokemonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewModel.swift; sourceTree = "<group>"; };
+		7E1F1BD4250957A9004FBB00 /* DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImage.swift; sourceTree = "<group>"; };
+		7EF8ADB0250963ED00118F44 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,7 @@
 			children = (
 				7E1F1BBA250945FC004FBB00 /* RequestInfos.swift */,
 				7E1F1BBC25094647004FBB00 /* RequestProtocol.swift */,
+				7E1F1BD4250957A9004FBB00 /* DownloadImage.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 				7E1F1BC1250947EB004FBB00 /* UIViewExtensions.swift */,
 				7E1F1BC325094828004FBB00 /* UIColorExtensions.swift */,
 				7E1F1BC525094854004FBB00 /* UIStackViewExtensions.swift */,
+				7EF8ADB0250963ED00118F44 /* UIImageViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -287,10 +293,12 @@
 				7E1F1BC425094828004FBB00 /* UIColorExtensions.swift in Sources */,
 				7E1F1BC925094BC8004FBB00 /* SearchTextField.swift in Sources */,
 				7E1F1BCD25094EC9004FBB00 /* PokemonListModel.swift in Sources */,
+				7EF8ADB1250963ED00118F44 /* UIImageViewExtensions.swift in Sources */,
 				7E1F1B9825093EFE004FBB00 /* Pokemon_app.xcdatamodeld in Sources */,
 				7E1F1BBB250945FC004FBB00 /* RequestInfos.swift in Sources */,
 				7E1F1BD3250952A8004FBB00 /* PokemonListViewModel.swift in Sources */,
 				7E1F1BC2250947EB004FBB00 /* UIViewExtensions.swift in Sources */,
+				7E1F1BD5250957A9004FBB00 /* DownloadImage.swift in Sources */,
 				7E1F1BCF2509514C004FBB00 /* PokemonListService.swift in Sources */,
 				7E1F1BB72509455F004FBB00 /* PokemonCell.swift in Sources */,
 				7E1F1BC625094854004FBB00 /* UIStackViewExtensions.swift in Sources */,
@@ -451,6 +459,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Pokemon app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -469,6 +478,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Pokemon app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

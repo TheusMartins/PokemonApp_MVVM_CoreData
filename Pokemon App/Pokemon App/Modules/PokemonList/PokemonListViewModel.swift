@@ -7,7 +7,8 @@
 //
 
 final class PokemonListViewModel {
-    private var dataSource: [PokemonListModel] = []
+    private var dataSource: [Pokemon] = []
+    private var filteredList: [Pokemon] = []
     private let service: PokemonListService
     
     init(service: PokemonListService = PokemonListServiceImpl()) {
@@ -17,17 +18,24 @@ final class PokemonListViewModel {
     func getPokemons(completion: @escaping() -> Void) {
         service.getPokemons { [weak self] modelList, error in
             guard let modelList = modelList else { return }
-            self?.dataSource = modelList
+            self?.dataSource = modelList.results
+            self?.filteredList = modelList.results
             completion()
         }
     }
     
     func getNumberOfRows() -> Int {
-        return dataSource.count
+        return filteredList.count
     }
     
     func getPokemonInfos(with index: Int) -> Pokemon {
-        return dataSource[index].results
+        return filteredList[index]
+    }
+    
+    func getListFiltered(with sting: String, completion: @escaping() -> Void) {
+        let filter = dataSource.filter { $0.name.lowercased().contains(sting.lowercased())}
+        filteredList = sting == "" ? dataSource : filter
+        completion()
     }
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 struct PokemonListModel: Codable {
-    let results: Pokemon
+    let results: [Pokemon]
 
 }
 

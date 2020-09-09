@@ -9,7 +9,9 @@
 import UIKit
 
 final class PokemonListController: UIViewController {
-        private lazy var customView: PokemonListView = PokemonListView(dataSource: self, delegate: self, searchTextFieldDelegate: self)
+        private lazy var customView: PokemonListView = PokemonListView(dataSource: self,
+                                                                       delegate: self,
+                                                                       searchTextFieldDelegate: self)
     private let viewModel: PokemonListViewModel
     
     init(viewmodel: PokemonListViewModel = PokemonListViewModel()) {
@@ -48,7 +50,7 @@ extension PokemonListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.reuseIdentifier) as? PokemonCell else { return UITableViewCell() }
-        cell.setupInfos(with: viewModel.getPokemonInfos(with: indexPath.row))
+        cell.setupInfos(with: viewModel.getPokemonInfos(with: indexPath.row), pokemonIndex: indexPath.row)
         return cell
     }
     
@@ -69,6 +71,8 @@ extension PokemonListController: UITableViewDataSource, UITableViewDelegate {
 
 extension PokemonListController: SearchTextFieldDelegate {
     func textFieldText(_ string: String) {
-        
+        viewModel.getListFiltered(with: string) { [weak self] in
+            self?.customView.tableView.reloadData()
+        }
     }
 }

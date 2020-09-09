@@ -23,13 +23,6 @@ class PokemonCell: UITableViewCell {
         return label
     }()
     
-    private let nationalDexNumber: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
-        label.textColor = UIColor(white: 1.0, alpha: 0.5)
-        return label
-    }()
-    
    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViewConfiguration()
@@ -39,14 +32,21 @@ class PokemonCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupInfos(with pokemon: Pokemon) {
+    func setupInfos(with pokemon: Pokemon, pokemonIndex: Int) {
         pokemonName.text = pokemon.name
+        pokemonImage.showLoading()
+        DownloadImage.shared.getPokemonImage(id: "\(pokemonIndex + 1)") { image, _ in
+            DispatchQueue.main.async {
+                self.pokemonImage.hideLoading()
+                self.pokemonImage.image = image
+            }
+        }
     }
 }
 
 extension PokemonCell: ViewConfiguration {
     func buildViewHierarchy() {
-        addSubViews(views: [pokemonImage, pokemonName, nationalDexNumber])
+        addSubViews(views: [pokemonImage, pokemonName])
     }
     
     func setupConstraints() {
@@ -56,18 +56,13 @@ extension PokemonCell: ViewConfiguration {
             pokemonImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             pokemonImage.trailingAnchor.constraint(equalTo: pokemonName.leadingAnchor, constant: -16),
             pokemonImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            pokemonImage.heightAnchor.constraint(equalToConstant: 52),
-            pokemonImage.widthAnchor.constraint(equalToConstant: 52),
+            pokemonImage.heightAnchor.constraint(equalToConstant: 100),
+            pokemonImage.widthAnchor.constraint(equalToConstant: 100),
     
             //pokemonName
             pokemonName.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             pokemonName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            pokemonName.bottomAnchor.constraint(equalTo: nationalDexNumber.topAnchor, constant: 2),
-        
-            //nationalDexNumber
-            nationalDexNumber.leadingAnchor.constraint(equalTo: pokemonName.leadingAnchor),
-            nationalDexNumber.trailingAnchor.constraint(equalTo: pokemonName.trailingAnchor),
-            nationalDexNumber.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            pokemonName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
         ])
     }
     
