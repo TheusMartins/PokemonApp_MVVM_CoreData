@@ -16,14 +16,14 @@ class PokemonListCell: UITableViewCell {
         return image
     }()
     
-    private let userNickname: UILabel = {
+    private let pokemonName: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)
         label.textColor = .white
         return label
     }()
     
-    private let userName: UILabel = {
+    private let nationalDexNumber: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         label.textColor = UIColor(white: 1.0, alpha: 0.5)
@@ -42,25 +42,28 @@ class PokemonListCell: UITableViewCell {
 
 extension PokemonListCell: ViewConfiguration {
     func buildViewHierarchy() {
-        addSubViews(views: [pokemonImage, userNickname, userName])
+        addSubViews(views: [pokemonImage, pokemonName, nationalDexNumber])
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            //pokemonImage
             pokemonImage.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             pokemonImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            pokemonImage.trailingAnchor.constraint(equalTo: userNickname.leadingAnchor, constant: -16),
+            pokemonImage.trailingAnchor.constraint(equalTo: pokemonName.leadingAnchor, constant: -16),
             pokemonImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
             pokemonImage.heightAnchor.constraint(equalToConstant: 52),
             pokemonImage.widthAnchor.constraint(equalToConstant: 52),
     
-            userNickname.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            userNickname.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            userNickname.bottomAnchor.constraint(equalTo: userName.topAnchor, constant: 2),
+            //pokemonName
+            pokemonName.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            pokemonName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            pokemonName.bottomAnchor.constraint(equalTo: nationalDexNumber.topAnchor, constant: 2),
         
-            userName.leadingAnchor.constraint(equalTo: userNickname.leadingAnchor),
-            userName.trailingAnchor.constraint(equalTo: userNickname.trailingAnchor),
-            userName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            //nationalDexNumber
+            nationalDexNumber.leadingAnchor.constraint(equalTo: pokemonName.leadingAnchor),
+            nationalDexNumber.trailingAnchor.constraint(equalTo: pokemonName.trailingAnchor),
+            nationalDexNumber.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
     
