@@ -16,6 +16,10 @@
 		7E1F1BB72509455F004FBB00 /* PokemonListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BB62509455F004FBB00 /* PokemonListCell.swift */; };
 		7E1F1BBB250945FC004FBB00 /* RequestInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BBA250945FC004FBB00 /* RequestInfos.swift */; };
 		7E1F1BBD25094647004FBB00 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BBC25094647004FBB00 /* RequestProtocol.swift */; };
+		7E1F1BC0250947C2004FBB00 /* UITableViewCellExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BBF250947C2004FBB00 /* UITableViewCellExtensions.swift */; };
+		7E1F1BC2250947EB004FBB00 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BC1250947EB004FBB00 /* UIViewExtensions.swift */; };
+		7E1F1BC425094828004FBB00 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BC325094828004FBB00 /* UIColorExtensions.swift */; };
+		7E1F1BC625094854004FBB00 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F1BC525094854004FBB00 /* UIStackViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,10 @@
 		7E1F1BB62509455F004FBB00 /* PokemonListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListCell.swift; sourceTree = "<group>"; };
 		7E1F1BBA250945FC004FBB00 /* RequestInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInfos.swift; sourceTree = "<group>"; };
 		7E1F1BBC25094647004FBB00 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		7E1F1BBF250947C2004FBB00 /* UITableViewCellExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellExtensions.swift; sourceTree = "<group>"; };
+		7E1F1BC1250947EB004FBB00 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		7E1F1BC325094828004FBB00 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		7E1F1BC525094854004FBB00 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +94,7 @@
 				7E1F1B8D25093EFE004FBB00 /* AppDelegate.swift */,
 				7E1F1BB9250945C7004FBB00 /* Network */,
 				7E1F1BB825094599004FBB00 /* Modules */,
+				7E1F1BBE250947A3004FBB00 /* Extensions */,
 				7E1F1B9925093F01004FBB00 /* Assets.xcassets */,
 				7E1F1B9B25093F01004FBB00 /* LaunchScreen.storyboard */,
 				7E1F1B9E25093F01004FBB00 /* Info.plist */,
@@ -135,6 +144,17 @@
 				7E1F1BBC25094647004FBB00 /* RequestProtocol.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		7E1F1BBE250947A3004FBB00 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7E1F1BBF250947C2004FBB00 /* UITableViewCellExtensions.swift */,
+				7E1F1BC1250947EB004FBB00 /* UIViewExtensions.swift */,
+				7E1F1BC325094828004FBB00 /* UIColorExtensions.swift */,
+				7E1F1BC525094854004FBB00 /* UIStackViewExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,9 +257,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1F1BC425094828004FBB00 /* UIColorExtensions.swift in Sources */,
 				7E1F1B9825093EFE004FBB00 /* Pokemon_app.xcdatamodeld in Sources */,
 				7E1F1BBB250945FC004FBB00 /* RequestInfos.swift in Sources */,
+				7E1F1BC2250947EB004FBB00 /* UIViewExtensions.swift in Sources */,
 				7E1F1BB72509455F004FBB00 /* PokemonListCell.swift in Sources */,
+				7E1F1BC625094854004FBB00 /* UIStackViewExtensions.swift in Sources */,
+				7E1F1BC0250947C2004FBB00 /* UITableViewCellExtensions.swift in Sources */,
 				7E1F1BBD25094647004FBB00 /* RequestProtocol.swift in Sources */,
 				7E1F1BB425094411004FBB00 /* PokemonListController.swift in Sources */,
 				7E1F1B8E25093EFE004FBB00 /* AppDelegate.swift in Sources */,
