@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PokemonListController.swift
 //  Pokemon app
 //
 //  Created by Scizor on 09/09/20.
@@ -8,13 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class PokemonListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .red
     }
-
-
 }
-
