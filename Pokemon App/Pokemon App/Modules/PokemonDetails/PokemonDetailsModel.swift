@@ -9,7 +9,7 @@
 import Foundation
 
 struct PokemonDetailsModel: Codable {
-    let id: Int
+    let id: Int32
     let name: String
     let sprites: PokemonSprites
     let types: [PokemonType]

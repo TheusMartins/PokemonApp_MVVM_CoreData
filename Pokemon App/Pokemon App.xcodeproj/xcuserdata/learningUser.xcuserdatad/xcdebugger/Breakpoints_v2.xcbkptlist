@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1D87F701-7D34-442B-A5F3-3FBA61A0DB7D"
+            uuid = "CB2112D1-68F1-4876-A0D8-198E49BCB9A3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pokemon app/Network/RequestProtocol.swift"
+            filePath = "Pokemon app/Modules/PokemonDetails/PokemonDetailsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "requestObject(model:_:completionHandler:)"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "getPokemon(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
