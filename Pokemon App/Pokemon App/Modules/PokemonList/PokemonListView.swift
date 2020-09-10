@@ -23,7 +23,7 @@ final class PokemonListView: UIView {
         let button = UIButton()
         let image = UIImage(named: "iconArrowDown")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
-        button.tintColor = .white
+        button.tintColor = .primaryColor
         return button
     }()
     

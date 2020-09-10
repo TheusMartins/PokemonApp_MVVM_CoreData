@@ -57,6 +57,8 @@ final class PokemonDetailsView: UIView {
     
     private let addPokemonButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .primaryColor
+        button.layer.cornerRadius = 8
         button.setTitle("Add in your Team", for: .normal)
         return button
     }()
@@ -117,6 +119,7 @@ extension PokemonDetailsView: ViewConfiguration {
             pokemonInfosStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             pokemonInfosStack.bottomAnchor.constraint(lessThanOrEqualTo: addPokemonButton.topAnchor),
 
+            addPokemonButton.heightAnchor.constraint(equalToConstant: 40),
             addPokemonButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             addPokemonButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             addPokemonButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -24)

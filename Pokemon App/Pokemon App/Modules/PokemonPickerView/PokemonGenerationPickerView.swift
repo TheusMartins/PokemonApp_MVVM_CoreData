@@ -31,7 +31,7 @@ final class PokemonGenerationPickerView: UIView {
     private let closeButton: UIButton = {
         let button = UIButton()
         button.setTitle("Ok", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.primaryColor, for: .normal)
         return button
     }()
     
