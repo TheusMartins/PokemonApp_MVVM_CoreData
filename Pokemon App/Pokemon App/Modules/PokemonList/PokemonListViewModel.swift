@@ -43,6 +43,10 @@ final class PokemonListViewModel {
     func getPokemonInfos(with index: Int) -> Pokemon {
         return dataSource[index]
     }
+    
+    func getPokemonName(at index: Int) -> String {
+        return dataSource[index].name
+    }
 }
 
 extension PokemonListViewModel: PokemonGenerationPickerDelegate {

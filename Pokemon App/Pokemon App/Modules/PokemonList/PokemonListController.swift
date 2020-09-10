@@ -62,7 +62,8 @@ extension PokemonListController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let pokemonDetailsController = PokemonDetailsController(pokemonName: viewModel.getPokemonName(at: indexPath.row))
+        navigationController?.pushViewController(pokemonDetailsController, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

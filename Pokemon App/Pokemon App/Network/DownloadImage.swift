@@ -36,5 +36,29 @@ final class DownloadImage {
             completion(image, nil)
         }.resume()
     }
+    
+    func getPokemonImage(url: URL, completion: @escaping (UIImage?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                completion(nil, error)
+                return
+            }
+            
+            guard let imageData = data else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let image = UIImage(data: imageData) else {
+                completion(nil, error)
+                return
+            }
+            
+            completion(image, nil)
+        }.resume()
+    }
 }
 
