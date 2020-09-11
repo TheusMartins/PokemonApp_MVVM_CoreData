@@ -11,23 +11,43 @@ import UIKit
 final class PokemonTeamGeneralController: UIViewController {
     private let customView = PokemonTeamGeneralView()
     private let viewModel = PokemonTeamGeneralViewModel()
+    private var pokemonControllers: [PokemonController] = []
     
     override func loadView() {
         super.loadView()
         view = customView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateTeam),
+            name: NSNotification.Name(rawValue: "UpdateLocalPokemons"),
+            object: nil
+        )
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.getAllLocalPokemons().forEach { model in
-            let controller = PokemonController(model: model)
+        super.viewWillAppear(animated)
+        updateTeam()
+    }
+    
+    private func addPokemons() {
+        customView.stackView.removeArrangedSubviews()
+        for controller in pokemonControllers {
             customView.stackView.addArrangedSubviews(views: [controller.view])
             addChild(controller)
             controller.didMove(toParent: self)
         }
-        
-        navigationController?.navigationBar.barStyle = .blackOpaque
-        navigationController?.navigationBar.isHidden = false
-        title = "Teste"
-        setupTitle("Team pokemon")
+    }
+    
+    @objc private func updateTeam() {
+        pokemonControllers = []
+        viewModel.getAllLocalPokemons().forEach { model in
+            let controller = PokemonController(model: model)
+            pokemonControllers.append(controller)
+        }
+        addPokemons()
     }
 }

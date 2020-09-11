@@ -51,6 +51,7 @@ final class PokemonView: UIView {
     
     let trashButton: UIButton = {
         let button = UIButton()
+        button.isUserInteractionEnabled = true
         let image = UIImage(named: "icTrash")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tintColor = .red
@@ -86,6 +87,8 @@ extension PokemonView: ViewConfiguration {
             imagesStackView,
             pokemonInfosStack
         ])
+        
+        bringSubviewToFront(trashButton)
         imagesStackView.addArrangedSubviews(views: [frontImage])
         pokemonInfosStack.addArrangedSubviews(views: [nationalDexIdLabel, pokemonTypesLabel])
     }

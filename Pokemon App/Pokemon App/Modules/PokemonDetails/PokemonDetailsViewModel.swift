@@ -49,7 +49,7 @@ final class PokemonDetailsViewModel {
     
     func addPokemon(completion: @escaping(_ feedbackMessage: String) -> Void) {
         guard let pokemon = pokemonModel else { return }
-        if service.canAddPokemon() {
+        if service.canAddPokemon(pokemonId: pokemon.id) {
             service.addPokemon(model: pokemon, imageData: imageData)
             completion("Pokemon successfully added")
         } else {

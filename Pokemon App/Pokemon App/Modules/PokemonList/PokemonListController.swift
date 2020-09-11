@@ -32,7 +32,7 @@ final class PokemonListController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateTableView),
-            name: NSNotification.Name(rawValue: "Teste"),
+            name: NSNotification.Name(rawValue: "UpdateInfos"),
             object: nil
         )
     }

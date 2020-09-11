@@ -18,7 +18,8 @@ final class PokemonViewModel {
         self.pokemon = pokemon
     }
     
-    func removePokemonFromTeam() {
+    func removePokemonFromTeam(completion: @escaping(_ feedbackMessage: String) -> Void) {
         service.removeFromTeam(id: pokemon.id)
+        completion("\(pokemon.name?.capitalized ?? "") has been removed from your team")
     }
 }

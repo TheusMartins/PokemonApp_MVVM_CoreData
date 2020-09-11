@@ -46,8 +46,10 @@ final class PokemonDetailsController: UIViewController {
     }
     
     @objc private func addPokemon() {
-        viewModel.addPokemon { feedbackMessage in
-            print(feedbackMessage)
+        viewModel.addPokemon { [weak self] feedbackMessage in
+            let alert = UIAlertController(title: feedbackMessage, message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self?.navigationController?.present(alert, animated: true, completion: nil)
         }
     }
     

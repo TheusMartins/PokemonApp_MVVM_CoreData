@@ -36,7 +36,7 @@ final class PokemonListViewModel {
         service.getPokemons(limit: limit, offset: offset) { [weak self] modelList, error in
             guard let modelList = modelList else { return }
             self?.dataSource = modelList.results
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Teste"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UpdateInfos"), object: nil)
             completion()
         }
     }

@@ -14,7 +14,7 @@ protocol PokemonDetailsService {
 
 protocol PokemonDetailsCoreDataOperations {
     func addPokemon(model: PokemonDetailsModel, imageData: Data?)
-    func canAddPokemon() -> Bool
+    func canAddPokemon(pokemonId: Int32) -> Bool
 }
 
 class PokemonDetailsServiceImpl: PokemonDetailsService, PokemonDetailsCoreDataOperations {
@@ -45,8 +45,8 @@ class PokemonDetailsServiceImpl: PokemonDetailsService, PokemonDetailsCoreDataOp
         return coreDataManager.addPokemon(model: model, frontImage: imageData)
     }
     
-    func canAddPokemon() -> Bool {
-        return !coreDataManager.isTeamCompleted()
+    func canAddPokemon(pokemonId: Int32) -> Bool {
+        return coreDataManager.canAddPokemon(pokemonId: pokemonId)
     }
 }
 

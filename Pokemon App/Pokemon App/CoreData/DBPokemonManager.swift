@@ -58,9 +58,11 @@ final class DBPokemonManager {
         let pokemon = getPokemons().first(where: { $0.id == pokemonId})
         guard let pokemonToBeDeleted = pokemon else { return }
         context.delete(pokemonToBeDeleted)
+        coreDataManager.saveContext()
     }
     
-    func isTeamCompleted() -> Bool {
-        return getPokemons().count == 6
+    func canAddPokemon(pokemonId: Int32) -> Bool {
+        let isPokemonAlreadyAdd = getPokemons().filter({ $0.id == pokemonId}).count > 0 ? true : false
+        return getPokemons().count < 6 && !isPokemonAlreadyAdd
     }
 }
