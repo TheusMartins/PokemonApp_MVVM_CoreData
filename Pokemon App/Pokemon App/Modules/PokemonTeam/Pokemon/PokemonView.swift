@@ -27,13 +27,7 @@ final class PokemonView: UIView {
     }()
     private let frontImage: UIImageView = {
         let image = UIImageView(frame: .zero)
-        image.layer.cornerRadius = 26
-        image.clipsToBounds = true
-        return image
-    }()
-    
-    private let backImage: UIImageView = {
-        let image = UIImageView(frame: .zero)
+        image.contentMode = .scaleAspectFit
         image.layer.cornerRadius = 26
         image.clipsToBounds = true
         return image
@@ -74,11 +68,13 @@ final class PokemonView: UIView {
     
     func setupInfos(with model: DBPokemon) {
         DispatchQueue.main.async {
-            self.nationalDexIdLabel.text = "\(model.id)"
+            self.nationalDexIdLabel.text = "National dex number: \(model.id)"
             self.pokemonTypesLabel.text = "Type: "
             for type in model.type ?? [] {
                 self.pokemonTypesLabel.text! += type + " "
             }
+            guard let imageData = model.front else { return }
+            self.frontImage.image = UIImage(data: imageData)
         }
     }
 }
@@ -90,7 +86,7 @@ extension PokemonView: ViewConfiguration {
             imagesStackView,
             pokemonInfosStack
         ])
-        imagesStackView.addArrangedSubviews(views: [frontImage, backImage])
+        imagesStackView.addArrangedSubviews(views: [frontImage])
         pokemonInfosStack.addArrangedSubviews(views: [nationalDexIdLabel, pokemonTypesLabel])
     }
     

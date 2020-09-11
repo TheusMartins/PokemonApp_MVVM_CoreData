@@ -22,6 +22,7 @@ final class PokemonDetailsController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             self?.viewModel.getPokemon { [weak self] model in
                 self?.customView.setupInfos(with: model)
+                self?.getPokemonImage()
             }
         }
         
@@ -47,6 +48,14 @@ final class PokemonDetailsController: UIViewController {
     @objc private func addPokemon() {
         viewModel.addPokemon { feedbackMessage in
             print(feedbackMessage)
+        }
+    }
+    
+    private func getPokemonImage() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewModel.getPokemonImage { [weak self] image, hasErrors in
+                self?.customView.setupImages(front: image, hasError: hasErrors)
+            }
         }
     }
 }

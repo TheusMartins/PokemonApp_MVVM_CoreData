@@ -13,17 +13,9 @@ final class TabBarController: UITabBarController {
         return UITabBarController()
     }
     
-    private let pokemonListController: PokemonListController = {
-        let controller = PokemonListController()
-        controller.title = "Pokedex"
-        return controller
-    }()
+    private let pokemonListController = PokemonListController()
     
-    private let pokemonTeamController: PokemonTeamGeneralController = {
-        let controller = PokemonTeamGeneralController()
-        controller.setupTitle("Pokemon team")
-        return controller
-    }()
+    private let pokemonTeamController = PokemonTeamGeneralController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

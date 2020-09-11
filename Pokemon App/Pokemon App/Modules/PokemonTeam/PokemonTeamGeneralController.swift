@@ -24,5 +24,10 @@ final class PokemonTeamGeneralController: UIViewController {
             addChild(controller)
             controller.didMove(toParent: self)
         }
+        
+        navigationController?.navigationBar.barStyle = .blackOpaque
+        navigationController?.navigationBar.isHidden = false
+        title = "Teste"
+        setupTitle("Team pokemon")
     }
 }

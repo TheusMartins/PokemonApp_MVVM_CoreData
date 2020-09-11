@@ -34,30 +34,20 @@ class PokemonCell: UITableViewCell {
     
     func setupInfos(with pokemon: Pokemon, pokemonIndex: Int) {
         pokemonImage.image = nil
-        pokemonName.text = pokemon.name
+        pokemonName.text = pokemon.name.capitalized
         pokemonImage.showLoading()
-        let id = pokemon.url.absoluteString.split(whereSeparator: { $0 == "/"}).map(String.init).last
-        DownloadImageViewModel.shared.getPokemonImage(id: id!) { image, error in
-            guard let image = image else {
-                DispatchQueue.main.async {
-                    self.pokemonImage.hideLoading()
-                    let imagem = UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate)
-                    self.pokemonImage.image = imagem
-                    self.pokemonImage.tintColor = .white
-                }
-                return
-            }
-            DispatchQueue.main.async {
-                self.pokemonImage.hideLoading()
-                self.pokemonImage.image = image
-            }
-        }
+    }
+    
+    func setupImage(image: UIImage, hasError: Bool) {
+        if hasError { pokemonImage.tintColor = .white }
+        pokemonImage.hideLoading()
+        pokemonImage.image = image
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        pokemonImage.image = nil
         pokemonImage.hideLoading()
+        pokemonImage.image = nil
     }
 }
 

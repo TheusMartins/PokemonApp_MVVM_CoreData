@@ -12,7 +12,7 @@ import UIKit
 final class DBPokemonManager {
     private let coreDataManager = CoreDataManager.shared
     
-    func addPokemon(model: PokemonDetailsModel, frontImage: Data?, backImage: Data?) {
+    func addPokemon(model: PokemonDetailsModel, frontImage: Data?) {
         
         for pokemon in getPokemons() {
             if pokemon.id == model.id {
@@ -32,7 +32,6 @@ final class DBPokemonManager {
         pokemon.name = model.name
         pokemon.type = type
         pokemon.front = frontImage
-        pokemon.back = backImage
         
         coreDataManager.saveContext()
     }

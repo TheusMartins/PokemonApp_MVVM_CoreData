@@ -20,7 +20,6 @@ extension DBPokemon {
         return NSFetchRequest<DBPokemon>(entityName: "DBPokemon")
     }
 
-    @NSManaged public var back: Data?
     @NSManaged public var front: Data?
     @NSManaged public var id: Int32
     @NSManaged public var name: String?

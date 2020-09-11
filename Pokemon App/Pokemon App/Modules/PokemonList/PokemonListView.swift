@@ -69,7 +69,7 @@ final class PokemonListView: UIView {
         NSLayoutConstraint.activate([
             picker.leadingAnchor.constraint(equalTo: leadingAnchor),
             picker.trailingAnchor.constraint(equalTo: trailingAnchor),
-            picker.bottomAnchor.constraint(equalTo: bottomAnchor)
+            picker.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

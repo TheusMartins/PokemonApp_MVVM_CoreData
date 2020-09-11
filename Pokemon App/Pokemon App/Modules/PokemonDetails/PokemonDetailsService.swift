@@ -6,12 +6,14 @@
 //  Copyright © 2020 Scizor. All rights reserved.
 //
 
+import Foundation
+
 protocol PokemonDetailsService {
     func getPokemon(pokemonName: String, completion: @escaping (PokemonDetailsModel?, Error?) -> Void)
 }
 
 protocol PokemonDetailsCoreDataOperations {
-    func addPokemon(model: PokemonDetailsModel)
+    func addPokemon(model: PokemonDetailsModel, imageData: Data?)
     func canAddPokemon() -> Bool
 }
 
@@ -39,8 +41,8 @@ class PokemonDetailsServiceImpl: PokemonDetailsService, PokemonDetailsCoreDataOp
         }
     }
     
-    func addPokemon(model: PokemonDetailsModel) {
-        return coreDataManager.addPokemon(model: model, frontImage: nil, backImage: nil)
+    func addPokemon(model: PokemonDetailsModel, imageData: Data?) {
+        return coreDataManager.addPokemon(model: model, frontImage: imageData)
     }
     
     func canAddPokemon() -> Bool {

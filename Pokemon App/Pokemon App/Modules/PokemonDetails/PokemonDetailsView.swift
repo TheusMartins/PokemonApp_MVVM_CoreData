@@ -18,7 +18,7 @@ final class PokemonDetailsView: UIView {
         return stack
     }()
     
-    private let imagesStackView: UIStackView = {
+    private let imageStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .fillEqually
@@ -27,13 +27,7 @@ final class PokemonDetailsView: UIView {
     }()
     private let frontImage: UIImageView = {
         let image = UIImageView(frame: .zero)
-        image.layer.cornerRadius = 26
-        image.clipsToBounds = true
-        return image
-    }()
-    
-    private let backImage: UIImageView = {
-        let image = UIImageView(frame: .zero)
+        image.contentMode = .scaleAspectFit
         image.layer.cornerRadius = 26
         image.clipsToBounds = true
         return image
@@ -73,48 +67,44 @@ final class PokemonDetailsView: UIView {
     }
     
     func setupInfos(with model: PokemonDetailsModel) {
-        DispatchQueue.main.async {
-            self.nationalDexIdLabel.text = "National dex id: \(model.id)"
-            self.pokemonTypesLabel.text = "Type: "
+        DispatchQueue.main.async { [weak self] in
+            self?.nationalDexIdLabel.text = "National dex id: \(model.id)"
+            self?.pokemonTypesLabel.text = "Type: "
             for type in model.types {
-                self.pokemonTypesLabel.text! += type.type.name.capitalized + " "
+                self?.pokemonTypesLabel.text! += type.type.name.capitalized + " "
             }
-            
-            DownloadImageViewModel.shared.getPokemonImage(url: model.sprites.front) { image, error in
-                DispatchQueue.main.async {
-                    self.frontImage.image = image
-                }
-            }
-            
-            DownloadImageViewModel.shared.getPokemonImage(url: model.sprites.back) { image, error in
-                DispatchQueue.main.async {
-                    self.backImage.image = image
-                }
-            }
+            self?.frontImage.showLoading()
         }
-        
+    }
+    
+    func setupImages(front: UIImage, hasError: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            if hasError { self?.frontImage.tintColor = .white }
+            self?.frontImage.hideLoading()
+            self?.frontImage.image = front
+        }
     }
 }
 
 extension PokemonDetailsView: ViewConfiguration {
     func buildViewHierarchy() {
         addSubViews(views: [
-            imagesStackView,
+            imageStackView,
             pokemonInfosStack,
             addPokemonButton
         ])
-        imagesStackView.addArrangedSubviews(views: [frontImage, backImage])
+        imageStackView.addArrangedSubviews(views: [frontImage])
         pokemonInfosStack.addArrangedSubviews(views: [nationalDexIdLabel, pokemonTypesLabel])
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            imagesStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 24),
-            imagesStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-            imagesStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-            imagesStackView.heightAnchor.constraint(equalToConstant: 150),
+            imageStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 24),
+            imageStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            imageStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            imageStackView.heightAnchor.constraint(equalToConstant: 150),
         
-            pokemonInfosStack.topAnchor.constraint(equalTo: imagesStackView.bottomAnchor, constant: 24),
+            pokemonInfosStack.topAnchor.constraint(equalTo: imageStackView.bottomAnchor, constant: 24),
             pokemonInfosStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             pokemonInfosStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             pokemonInfosStack.bottomAnchor.constraint(lessThanOrEqualTo: addPokemonButton.topAnchor),

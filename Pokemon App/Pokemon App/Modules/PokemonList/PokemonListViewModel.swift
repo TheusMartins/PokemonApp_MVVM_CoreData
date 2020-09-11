@@ -21,9 +21,14 @@ final class PokemonListViewModel {
     ]
     private var dataSource: [Pokemon] = []
     private let service: PokemonListService
+    private let imageDownloader: DownloadImageViewModel
     
-    init(service: PokemonListService = PokemonListServiceImpl()) {
+    init(
+        service: PokemonListService = PokemonListServiceImpl(),
+        imageDownloader: DownloadImageViewModel = DownloadImageViewModel.shared
+    ) {
         self.service = service
+        self.imageDownloader = imageDownloader
         getPokemons { }
     }
     
@@ -46,6 +51,19 @@ final class PokemonListViewModel {
     
     func getPokemonName(at index: Int) -> String {
         return dataSource[index].name
+    }
+    
+    func getImage(at index: Int, completion: @escaping(_ image: UIImage, _ hasError: Bool) -> Void) {
+        let pokemonId = dataSource[index].url.absoluteString.split(whereSeparator: { $0 == "/"}).map(String.init).last
+        imageDownloader.getPokemonImage(id: pokemonId ?? "") { image, error in
+            guard let image = image else {
+                let errorImage = UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate)
+                completion(errorImage!, true)
+                return
+            }
+            
+            completion(image, false)
+        }
     }
 }
 
