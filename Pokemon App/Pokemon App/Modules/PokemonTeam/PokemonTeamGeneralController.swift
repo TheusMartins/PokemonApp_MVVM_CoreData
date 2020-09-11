@@ -17,8 +17,7 @@ final class PokemonTeamGeneralController: UIViewController {
         view = customView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
         viewModel.getAllLocalPokemons().forEach { model in
             let controller = PokemonController(model: model)
             customView.stackView.addArrangedSubviews(views: [controller.view])
