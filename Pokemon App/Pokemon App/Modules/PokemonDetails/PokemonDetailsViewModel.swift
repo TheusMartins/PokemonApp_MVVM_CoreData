@@ -9,8 +9,7 @@
 final class PokemonDetailsViewModel {
     private let service: PokemonDetailsService
     private let pokemonName: String
-    
-    private let dbManager = DBPokemonManager()
+    private var pokemonModel: PokemonDetailsModel?
     
     init(
         service: PokemonDetailsService = PokemonDetailsServiceImpl(),
@@ -21,10 +20,14 @@ final class PokemonDetailsViewModel {
     }
     
     func getPokemon(completion: @escaping(_ model: PokemonDetailsModel) -> Void) {
-        service.getPokemon(pokemonName: pokemonName) { model, error in
+        service.getPokemon(pokemonName: pokemonName) { [weak self] model, error in
             guard let model = model else { return }
-            self.dbManager.addPokemon(model: model, frontImage: nil, backImage: nil)
+            self?.pokemonModel = model
             completion(model)
         }
+    }
+    
+    func addPokemon() {
+        
     }
 }

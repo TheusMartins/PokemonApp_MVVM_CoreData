@@ -37,7 +37,7 @@ class PokemonCell: UITableViewCell {
         pokemonName.text = pokemon.name
         pokemonImage.showLoading()
         let id = pokemon.url.absoluteString.split(whereSeparator: { $0 == "/"}).map(String.init).last
-        DownloadImage.shared.getPokemonImage(id: id!) { image, error in
+        DownloadImageViewModel.shared.getPokemonImage(id: id!) { image, error in
             guard let image = image else {
                 DispatchQueue.main.async {
                     self.pokemonImage.hideLoading()

@@ -28,7 +28,6 @@ final class DBPokemonManager {
         pokemon.back = backImage
         
         coreDataManager.saveContext()
-        
     }
     
     func getPokemons() -> [DBPokemon] {

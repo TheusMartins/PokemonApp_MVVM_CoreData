@@ -10,9 +10,9 @@ protocol PokemonDetailsService {
     func getPokemon(pokemonName: String, completion: @escaping (PokemonDetailsModel?, Error?) -> Void)
 }
 
-//protocol PokemonDetailsCoreDataOperation {
-//    func 
-//}
+protocol PokemonDetailsCoreDataOperations {
+    func addPokemon()
+}
 
 class PokemonDetailsServiceImpl: PokemonDetailsService {
     typealias Target = PokemonDetailsTargetType

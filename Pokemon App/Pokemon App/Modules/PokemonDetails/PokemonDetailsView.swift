@@ -80,13 +80,13 @@ final class PokemonDetailsView: UIView {
                 self.pokemonTypesLabel.text! += type.type.name.capitalized + " "
             }
             
-            DownloadImage.shared.getPokemonImage(url: model.sprites.front) { image, error in
+            DownloadImageViewModel.shared.getPokemonImage(url: model.sprites.front) { image, error in
                 DispatchQueue.main.async {
                     self.frontImage.image = image
                 }
             }
             
-            DownloadImage.shared.getPokemonImage(url: model.sprites.back) { image, error in
+            DownloadImageViewModel.shared.getPokemonImage(url: model.sprites.back) { image, error in
                 DispatchQueue.main.async {
                     self.backImage.image = image
                 }
