@@ -13,6 +13,13 @@ final class DBPokemonManager {
     private let coreDataManager = CoreDataManager.shared
     
     func addPokemon(model: PokemonDetailsModel, frontImage: Data?, backImage: Data?) {
+        
+        for pokemon in getPokemons() {
+            if pokemon.id == model.id {
+                return
+            }
+        }
+        
         guard getPokemons().count < 6 else { return }
         let pokemon = DBPokemon(context: coreDataManager.getContext())
         var type: [String] = []

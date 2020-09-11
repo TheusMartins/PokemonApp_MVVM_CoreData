@@ -7,12 +7,12 @@
 //
 
 final class PokemonDetailsViewModel {
-    private let service: PokemonDetailsService
+    private let service: PokemonDetailsService & PokemonDetailsCoreDataOperations
     private let pokemonName: String
     private var pokemonModel: PokemonDetailsModel?
     
     init(
-        service: PokemonDetailsService = PokemonDetailsServiceImpl(),
+        service: PokemonDetailsService & PokemonDetailsCoreDataOperations = PokemonDetailsServiceImpl(),
         pokemonName: String
     ) {
         self.service = service
@@ -27,7 +27,13 @@ final class PokemonDetailsViewModel {
         }
     }
     
-    func addPokemon() {
-        
+    func addPokemon(completion: @escaping(_ feedbackMessage: String) -> Void) {
+        guard let pokemon = pokemonModel else { return }
+        if service.canAddPokemon() {
+            service.addPokemon(model: pokemon)
+            completion("Pokemon successfully added")
+        } else {
+            completion("Pokemon not added, your team is complete or you already have this pokemon in your team")
+        }
     }
 }

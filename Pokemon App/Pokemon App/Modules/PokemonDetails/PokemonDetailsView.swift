@@ -55,7 +55,7 @@ final class PokemonDetailsView: UIView {
         return label
     }()
     
-    private let addPokemonButton: UIButton = {
+    let addPokemonButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .primaryColor
         button.layer.cornerRadius = 8

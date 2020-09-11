@@ -29,7 +29,7 @@ final class SearchTextField: UIView {
         let field = UITextField()
         field.backgroundColor = .clear
         field.attributedPlaceholder = NSAttributedString(
-                string: "Procurar Pokemon",
+                string: "Search Pokemon",
                 attributes: [NSAttributedString.Key.foregroundColor : UIColor.white]
         )
         field.borderStyle = .none

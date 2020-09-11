@@ -24,6 +24,8 @@ final class PokemonDetailsController: UIViewController {
                 self?.customView.setupInfos(with: model)
             }
         }
+        
+        customView.addPokemonButton.addTarget(self, action: #selector(addPokemon), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,5 +42,11 @@ final class PokemonDetailsController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func addPokemon() {
+        viewModel.addPokemon { feedbackMessage in
+            print(feedbackMessage)
+        }
     }
 }

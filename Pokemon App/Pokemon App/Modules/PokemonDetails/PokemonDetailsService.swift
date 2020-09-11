@@ -11,16 +11,22 @@ protocol PokemonDetailsService {
 }
 
 protocol PokemonDetailsCoreDataOperations {
-    func addPokemon()
+    func addPokemon(model: PokemonDetailsModel)
+    func canAddPokemon() -> Bool
 }
 
-class PokemonDetailsServiceImpl: PokemonDetailsService {
+class PokemonDetailsServiceImpl: PokemonDetailsService, PokemonDetailsCoreDataOperations {
     typealias Target = PokemonDetailsTargetType
     
     private var provider: ProviderType<Target>
+    let coreDataManager: DBPokemonManager
     
-    init(provider: ProviderType<Target> = ProviderType<Target>()) {
+    init(
+        provider: ProviderType<Target> = ProviderType<Target>(),
+        coreDataManager: DBPokemonManager = DBPokemonManager()
+    ) {
         self.provider = provider
+        self.coreDataManager = coreDataManager
     }
     
     func getPokemon(pokemonName: String, completion: @escaping (PokemonDetailsModel?, Error?) -> Void) {
@@ -31,6 +37,14 @@ class PokemonDetailsServiceImpl: PokemonDetailsService {
                 completion(modelList, nil)
             }
         }
+    }
+    
+    func addPokemon(model: PokemonDetailsModel) {
+        return coreDataManager.addPokemon(model: model, frontImage: nil, backImage: nil)
+    }
+    
+    func canAddPokemon() -> Bool {
+        return !coreDataManager.isTeamCompleted()
     }
 }
 
