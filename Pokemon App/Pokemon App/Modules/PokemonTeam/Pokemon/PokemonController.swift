@@ -33,6 +33,18 @@ final class PokemonController: UIViewController {
     }
     
     @objc private func removePokemonFromTeam() {
+        let alert = UIAlertController(title: "Remove \(viewModel.getPokemonName()) from your team?", message: nil, preferredStyle: .alert)
+        let removePokemonAction = UIAlertAction(title: "Remove", style: .destructive) { [weak self] _ in
+            self?.showFeedbackModal()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(removePokemonAction)
+        alert.addAction(cancelAction)
+        navigationController?.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func showFeedbackModal() {
         viewModel.removePokemonFromTeam { [weak self] feedbackMessage in
             let alert = UIAlertController(title: feedbackMessage, message: nil, preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
@@ -40,7 +52,6 @@ final class PokemonController: UIViewController {
             }
             alert.addAction(alertAction)
             self?.navigationController?.present(alert, animated: true, completion: nil)
-            
         }
     }
 }

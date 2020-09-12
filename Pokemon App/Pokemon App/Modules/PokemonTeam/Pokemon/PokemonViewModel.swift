@@ -22,4 +22,8 @@ final class PokemonViewModel {
         service.removeFromTeam(id: pokemon.id)
         completion("\(pokemon.name?.capitalized ?? "") has been removed from your team")
     }
+    
+    func getPokemonName() -> String {
+        return pokemon.name ?? ""
+    }
 }
