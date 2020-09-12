@@ -49,6 +49,12 @@ final class PokemonDetailsView: UIView {
         return label
     }()
     
+    private let spinnerLoader: Spinner = {
+        let loader = Spinner()
+        loader.color = .primaryColor
+        return loader
+    }()
+    
     let addPokemonButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .primaryColor
@@ -84,6 +90,14 @@ final class PokemonDetailsView: UIView {
             self?.frontImage.image = front
         }
     }
+    
+    func setLoading(isLoading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.spinnerLoader.isHidden = !isLoading
+            self?.addPokemonButton.isHidden = isLoading
+            isLoading ? self?.spinnerLoader.startAnimation() : self?.spinnerLoader.stopAnimating()
+        }
+    }
 }
 
 extension PokemonDetailsView: ViewConfiguration {
@@ -91,7 +105,8 @@ extension PokemonDetailsView: ViewConfiguration {
         addSubViews(views: [
             imageStackView,
             pokemonInfosStack,
-            addPokemonButton
+            addPokemonButton,
+            spinnerLoader
         ])
         imageStackView.addArrangedSubviews(views: [frontImage])
         pokemonInfosStack.addArrangedSubviews(views: [nationalDexIdLabel, pokemonTypesLabel])
@@ -112,7 +127,12 @@ extension PokemonDetailsView: ViewConfiguration {
             addPokemonButton.heightAnchor.constraint(equalToConstant: 40),
             addPokemonButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             addPokemonButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-            addPokemonButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -24)
+            addPokemonButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            
+            spinnerLoader.heightAnchor.constraint(equalToConstant: 52),
+            spinnerLoader.widthAnchor.constraint(equalToConstant: 52),
+            spinnerLoader.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            spinnerLoader.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
     

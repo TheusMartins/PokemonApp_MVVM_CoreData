@@ -9,9 +9,9 @@
 import UIKit
 
 final class PokemonListController: UIViewController {
-        private lazy var customView: PokemonListView = PokemonListView(dataSource: self,
-                                                                       delegate: self,
-                                                                       pokemonGenerationPickerDelegate: viewModel)
+    private lazy var customView: PokemonListView = PokemonListView(dataSource: self,
+                                                                   delegate: self,
+                                                                   pokemonGenerationPickerDelegate: self)
     private let viewModel: PokemonListViewModel
     
     init(viewmodel: PokemonListViewModel = PokemonListViewModel()) {
@@ -29,6 +29,7 @@ final class PokemonListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadPokemons()
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateTableView),
@@ -43,9 +44,32 @@ final class PokemonListController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    private func loadPokemons(generationIndex: Int = 0) {
+        customView.setLoading(isLoading: true)
+        viewModel.getPokemons(generationIndex: generationIndex) { [weak self] error in
+            if let _ = error {
+                self?.showErrorModal()
+            } else {
+                self?.customView.setLoading(isLoading: false)
+            }
+        }
+    }
+    
+    private func showErrorModal() {
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: "Could not load pokedex =(", message: nil, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Try again", style: .cancel) { [weak self] _ in
+                self?.loadPokemons()
+            }
+            alert.addAction(alertAction)
+            self?.navigationController?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     @objc private func updateTableView() {
-        DispatchQueue.main.async {
-            self.customView.tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.customView.tableView.reloadData()
+            self?.customView.setLoading(isLoading: false)
         }
     }
 }
@@ -80,5 +104,11 @@ extension PokemonListController: UITableViewDataSource, UITableViewDelegate {
         } else {
             customView.searchTextFieldTop?.constant = 75
         }
+    }
+}
+
+extension PokemonListController: PokemonGenerationPickerDelegate {
+    func didClosePickerView(generationIndex: Int) {
+        loadPokemons(generationIndex: generationIndex)
     }
 }

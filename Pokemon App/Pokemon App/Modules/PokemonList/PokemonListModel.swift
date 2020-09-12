@@ -10,7 +10,6 @@ import Foundation
 
 struct PokemonListModel: Codable {
     let results: [Pokemon]
-
 }
 
 struct Pokemon: Codable {

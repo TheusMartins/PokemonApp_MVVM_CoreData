@@ -18,7 +18,8 @@ public protocol RequestProtocol {
 class ProviderType<Target: TargetType> : RequestProtocol {
     func requestObject<Model>(model: Model.Type, _ target: Target, completionHandler: @escaping (Model?, Error?) -> Void) where Model : Codable {
         guard var url = URLComponents(string: "\(target.baseURL)\(target.endpoint)") else {
-            fatalError()
+            completionHandler(nil, NSError())
+            return
         }
         
         var components: [URLQueryItem] = []
@@ -35,20 +36,24 @@ class ProviderType<Target: TargetType> : RequestProtocol {
                 completionHandler(nil, error)
             }
             
-            guard let data = data else { fatalError() }
+            guard let data = data else {
+                completionHandler(nil, NSError())
+                return
+            }
             
             do {
                 let modelList = try JSONDecoder().decode(Model.self , from: data)
                 completionHandler(modelList, nil)
             } catch {
-                fatalError()
+                completionHandler(nil, NSError())
             }
         }.resume()
     }
     
     func requestData(target: Target, completionHandler: @escaping (_ data: Data?, _ error: Error?) -> Void) {
         guard var url = URLComponents(string: "\(target.baseURL)\(target.endpoint)") else {
-            fatalError()
+            completionHandler(nil, NSError())
+            return
         }
         
         var components: [URLQueryItem] = []
@@ -65,7 +70,10 @@ class ProviderType<Target: TargetType> : RequestProtocol {
                 completionHandler(nil, error)
             }
             
-            guard let data = data else { fatalError() }
+            guard let data = data else {
+                completionHandler(nil, NSError())
+                return
+            }
             
             completionHandler(data, nil)
 

@@ -19,13 +19,7 @@ final class PokemonDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async { [weak self] in
-            self?.viewModel.getPokemon { [weak self] model in
-                self?.customView.setupInfos(with: model)
-                self?.getPokemonImage()
-            }
-        }
-        
+        loadPokemonInfos()
         customView.addPokemonButton.addTarget(self, action: #selector(addPokemon), for: .touchUpInside)
     }
     
@@ -45,11 +39,18 @@ final class PokemonDetailsController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func addPokemon() {
-        viewModel.addPokemon { [weak self] feedbackMessage in
-            let alert = UIAlertController(title: feedbackMessage, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self?.navigationController?.present(alert, animated: true, completion: nil)
+    private func loadPokemonInfos() {
+        customView.setLoading(isLoading: true)
+        DispatchQueue.main.async { [weak self] in
+            self?.viewModel.getPokemon { [weak self] model in
+                guard let model = model else {
+                    self?.showErrorModal()
+                    return
+                }
+                self?.customView.setupInfos(with: model)
+                self?.getPokemonImage()
+                self?.customView.setLoading(isLoading: false)
+            }
         }
     }
     
@@ -58,6 +59,25 @@ final class PokemonDetailsController: UIViewController {
             self?.viewModel.getPokemonImage { [weak self] image, hasErrors in
                 self?.customView.setupImages(front: image, hasError: hasErrors)
             }
+        }
+    }
+    
+    private func showErrorModal() {
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: "Could not load pokemon =(", message: nil, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Try again", style: .cancel) { [weak self] _ in
+                self?.loadPokemonInfos()
+            }
+            alert.addAction(alertAction)
+            self?.navigationController?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @objc private func addPokemon() {
+        viewModel.addPokemon { [weak self] feedbackMessage in
+            let alert = UIAlertController(title: feedbackMessage, message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self?.navigationController?.present(alert, animated: true, completion: nil)
         }
     }
 }

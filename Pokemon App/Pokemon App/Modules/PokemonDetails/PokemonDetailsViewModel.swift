@@ -24,9 +24,12 @@ final class PokemonDetailsViewModel {
         self.pokemonName = pokemonName
     }
     
-    func getPokemon(completion: @escaping(_ model: PokemonDetailsModel) -> Void) {
+    func getPokemon(completion: @escaping(_ model: PokemonDetailsModel?) -> Void) {
         service.getPokemon(pokemonName: pokemonName) { [weak self] model, error in
-            guard let model = model else { return }
+            guard let model = model else {
+                completion(nil)
+                return
+            }
             self?.pokemonModel = model
             completion(model)
         }

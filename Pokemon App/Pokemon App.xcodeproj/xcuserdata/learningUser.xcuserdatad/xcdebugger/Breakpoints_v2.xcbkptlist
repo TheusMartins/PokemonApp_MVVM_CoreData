@@ -14,8 +14,8 @@
             filePath = "Pokemon app/Modules/PokemonDetails/PokemonDetailsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "getPokemonImage(completion:)"
             landmarkType = "7">
             <Locations>
@@ -32,7 +32,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
                   endingLineNumber = "37"
-                  offsetFromSymbolStart = "484">
+                  offsetFromSymbolStart = "448">
                </Location>
                <Location
                   uuid = "B91CDCE8-9172-4C41-B157-41D316702B7C - bfdface3f431b68f"
@@ -47,7 +47,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
                   endingLineNumber = "37"
-                  offsetFromSymbolStart = "238">
+                  offsetFromSymbolStart = "216">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -65,6 +65,38 @@
             startingLineNumber = "39"
             endingLineNumber = "39"
             landmarkName = "removePokemonFromTeam()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2B417956-46D0-4CF5-8829-144A9298CFD1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pokemon app/Modules/PokemonDetails/PokemonDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "setLoading(isLoading:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B66CD2E-3816-4368-A9ED-20CBD48841B7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pokemon app/Modules/PokemonList/PokemonListController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "loadPokemons(generationIndex:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -29,15 +29,18 @@ final class PokemonListViewModel {
     ) {
         self.service = service
         self.imageDownloader = imageDownloader
-        getPokemons { }
     }
     
-    func getPokemons(limit: Int = 151, offset: Int = 0, completion: @escaping() -> Void) {
-        service.getPokemons(limit: limit, offset: offset) { [weak self] modelList, error in
-            guard let modelList = modelList else { return }
+    func getPokemons(generationIndex: Int, completion: @escaping(_ error: Error?) -> Void) {
+        let generation =  pokemonGenerationRanges[generationIndex]
+        service.getPokemons(limit: generation.limit, offset: generation.offset) { [weak self] modelList, error in
+            guard let modelList = modelList else {
+                completion(error)
+                return
+            }
             self?.dataSource = modelList.results
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UpdateInfos"), object: nil)
-            completion()
+            completion(nil)
         }
     }
     
@@ -64,12 +67,5 @@ final class PokemonListViewModel {
             
             completion(image, false)
         }
-    }
-}
-
-extension PokemonListViewModel: PokemonGenerationPickerDelegate {
-    func didClosePickerView(generationIndex: Int) {
-        let generation =  pokemonGenerationRanges[generationIndex]
-        getPokemons(limit: generation.limit, offset: generation.offset) { }
     }
 }

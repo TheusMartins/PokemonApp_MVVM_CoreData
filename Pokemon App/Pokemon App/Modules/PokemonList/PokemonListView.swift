@@ -27,6 +27,12 @@ final class PokemonListView: UIView {
         return button
     }()
     
+    private let spinnerLoader: Spinner = {
+        let loader = Spinner()
+        loader.color = .primaryColor
+        return loader
+    }()
+    
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .projectBlack
@@ -72,11 +78,19 @@ final class PokemonListView: UIView {
             picker.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    func setLoading(isLoading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.spinnerLoader.isHidden = !isLoading
+            self?.tableView.isHidden = isLoading
+            isLoading ? self?.spinnerLoader.startAnimation() : self?.spinnerLoader.stopAnimating()
+        }
+    }
 }
 
 extension PokemonListView: ViewConfiguration {
     func buildViewHierarchy() {
-        addSubViews(views: [titleLabel, showPickerButton, tableView])
+        addSubViews(views: [titleLabel, showPickerButton, tableView, spinnerLoader])
     }
     
     func setupConstraints() {
@@ -93,7 +107,12 @@ extension PokemonListView: ViewConfiguration {
             searchTextFieldTop,
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            
+            spinnerLoader.heightAnchor.constraint(equalToConstant: 52),
+            spinnerLoader.widthAnchor.constraint(equalToConstant: 52),
+            spinnerLoader.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            spinnerLoader.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
     
