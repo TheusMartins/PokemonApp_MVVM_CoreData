@@ -19,12 +19,12 @@ final class PokemonController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        customView.setupInfos(with: viewModel.getPokemonInfos())
     }
     
-    init(model: DBPokemon) {
+    init(model: PokemonModel) {
         self.viewModel = PokemonViewModel(pokemon: model)
         super.init(nibName: nil, bundle: nil)
-        customView.setupInfos(with: model)
         customView.trashButton.addTarget(self, action: #selector(removePokemonFromTeam), for: .touchUpInside)
     }
     

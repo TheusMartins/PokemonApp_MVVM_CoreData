@@ -67,14 +67,14 @@ final class PokemonView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupInfos(with model: DBPokemon) {
+    func setupInfos(with model: PokemonModel) {
         DispatchQueue.main.async {
             self.nationalDexIdLabel.text = "National dex number: \(model.id)"
             self.pokemonTypesLabel.text = "Type: "
-            for type in model.type ?? [] {
+            for type in model.types ?? [] {
                 self.pokemonTypesLabel.text! += type + " "
             }
-            guard let imageData = model.front else { return }
+            guard let imageData = model.imageData else { return }
             self.frontImage.image = UIImage(data: imageData)
         }
     }

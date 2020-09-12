@@ -8,11 +8,11 @@
 
 final class PokemonViewModel {
     private let service: PokemonService
-    private let pokemon: DBPokemon
+    private let pokemon: PokemonModel
     
     init(
         service: PokemonService = PokemonServiceImpl(),
-        pokemon: DBPokemon
+        pokemon: PokemonModel
     ) {
         self.service = service
         self.pokemon = pokemon
@@ -25,5 +25,9 @@ final class PokemonViewModel {
     
     func getPokemonName() -> String {
         return pokemon.name ?? ""
+    }
+    
+    func getPokemonInfos() -> PokemonModel {
+        return pokemon
     }
 }

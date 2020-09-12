@@ -94,23 +94,23 @@
                   urlString = "file:///Users/learningUser/Desktop/iOS%20Projects/Pokemon%20app/Pokemon%20appTests/Modules/PokemonList/PokemonListViewModelTest.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "186">
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "466">
                </Location>
                <Location
-                  uuid = "0594A034-0B41-4A1C-9EDA-DCFB603328E1 - a90873f0aa456692"
+                  uuid = "0594A034-0B41-4A1C-9EDA-DCFB603328E1 - ce51f11828358c93"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIImage, Swift.Bool) -&gt; () in Pokemon_appTests.PokemonListViewModelTest.testGetImageFailure() -&gt; ()"
+                  symbolName = "closure #2 (__C.UIImage, Swift.Bool) -&gt; () in Pokemon_appTests.PokemonListViewModelTest.testGetImageFailure() -&gt; ()"
                   moduleName = "Pokemon appTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/learningUser/Desktop/iOS%20Projects/Pokemon%20app/Pokemon%20appTests/Modules/PokemonList/PokemonListViewModelTest.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
                   offsetFromSymbolStart = "28">
                </Location>
             </Locations>
@@ -129,6 +129,22 @@
             startingLineNumber = "24"
             endingLineNumber = "24"
             landmarkName = "getPokemon(pokemonId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "21E671EF-B80D-40B7-891C-F77BCF815AFA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pokemon appTests/Modules/PokemonDetails/PokemonDetailsViewModelTest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "testAddPokemonFailure()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

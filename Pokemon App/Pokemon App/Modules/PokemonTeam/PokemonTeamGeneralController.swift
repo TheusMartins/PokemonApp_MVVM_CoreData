@@ -45,6 +45,7 @@ final class PokemonTeamGeneralController: UIViewController {
     @objc private func updateTeam() {
         pokemonControllers = []
         viewModel.getAllLocalPokemons().forEach { model in
+            let model = PokemonModel(id: model.id, name: model.name, imageData: model.front, types: model.type)
             let controller = PokemonController(model: model)
             pokemonControllers.append(controller)
         }
