@@ -2,8 +2,8 @@
 //  PokemonService.swift
 //  Pokemon app
 //
-//  Created by Scizor on 11/09/20.
-//  Copyright © 2020 Scizor. All rights reserved.
+//  Created by Matheus Martins on 11/09/20.
+//  Copyright © 2020 Matheus Martins. All rights reserved.
 //
 
 protocol PokemonService {
