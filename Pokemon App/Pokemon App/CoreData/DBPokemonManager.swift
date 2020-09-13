@@ -10,8 +10,10 @@ import CoreData
 import UIKit
 
 final class DBPokemonManager {
+    //MARK: - Private properties
     private let coreDataManager = CoreDataManager.shared
     
+    //MARK: - Public Methods
     func addPokemon(model: PokemonDetailsModel, frontImage: Data?) {
         
         for pokemon in getPokemons() {

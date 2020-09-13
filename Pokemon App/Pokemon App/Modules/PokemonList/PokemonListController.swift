@@ -9,11 +9,13 @@
 import UIKit
 
 final class PokemonListController: UIViewController {
+    //MARK: - Private properties
     private lazy var customView: PokemonListView = PokemonListView(dataSource: self,
                                                                    delegate: self,
                                                                    pokemonGenerationPickerDelegate: self)
     private let viewModel: PokemonListViewModel
     
+    //MARK: - Initialization
     init(viewmodel: PokemonListViewModel = PokemonListViewModel()) {
         self.viewModel = viewmodel
         super.init(nibName: nil, bundle: nil)
@@ -23,6 +25,7 @@ final class PokemonListController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Overrides
     override func loadView() {
         self.view = customView
     }
@@ -44,6 +47,7 @@ final class PokemonListController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - Private methods
     private func loadPokemons(generationIndex: Int = 0) {
         customView.setLoading(isLoading: true)
         viewModel.getPokemons(generationIndex: generationIndex) { [weak self] error in
@@ -74,6 +78,7 @@ final class PokemonListController: UIViewController {
     }
 }
 
+//MARK: - UITableViewDataSource and UITableViewDelegate
 extension PokemonListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getNumberOfRows()
@@ -98,16 +103,21 @@ extension PokemonListController: UITableViewDataSource, UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y <= 75 {
-            customView.searchTextFieldTop?.constant = 75 - scrollView.contentOffset.y > 12 ? 75 - scrollView.contentOffset.y : 12
+            customView.tableViewTopAnchor?.constant = 75 - scrollView.contentOffset.y > 12 ? 75 - scrollView.contentOffset.y : 12
         } else if scrollView.contentOffset.y > 75 {
-            customView.searchTextFieldTop?.constant = 12
+            customView.tableViewTopAnchor?.constant = 12
         } else {
-            customView.searchTextFieldTop?.constant = 75
+            customView.tableViewTopAnchor?.constant = 75
         }
     }
 }
 
+//MARK: - PokemonGenerationPickerDelegate
 extension PokemonListController: PokemonGenerationPickerDelegate {
+    func didChangeGeneration(generation: String) {
+        customView.setupGenerationTitle(title: generation)
+    }
+    
     func didClosePickerView(generationIndex: Int) {
         loadPokemons(generationIndex: generationIndex)
     }

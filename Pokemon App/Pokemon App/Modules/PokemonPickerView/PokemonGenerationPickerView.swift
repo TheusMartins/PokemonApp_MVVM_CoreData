@@ -10,9 +10,11 @@ import UIKit
 
 protocol PokemonGenerationPickerDelegate: class {
     func didClosePickerView(generationIndex: Int)
+    func didChangeGeneration(generation: String)
 }
 
 final class PokemonGenerationPickerView: UIView {
+    //MARK: - Private properties
     private let pokemonGenerations = [
         "First generation",
         "Second generation",
@@ -21,7 +23,7 @@ final class PokemonGenerationPickerView: UIView {
         "Fifth generation",
         "Sixth generation",
         "Seventh generation",
-        "Eighth generatino"
+        "Eighth generatin"
     ]
     
     private let picker = UIPickerView()
@@ -35,8 +37,9 @@ final class PokemonGenerationPickerView: UIView {
         return button
     }()
     
-    weak var delegate: PokemonGenerationPickerDelegate?
+    private weak var delegate: PokemonGenerationPickerDelegate?
     
+    //MARK: - Initialization
     init(delegate: PokemonGenerationPickerDelegate) {
         self.delegate = delegate
         super.init(frame: .zero)
@@ -49,12 +52,15 @@ final class PokemonGenerationPickerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Private methods
     @objc private func closePickerView() {
         delegate?.didClosePickerView(generationIndex: generationIndex)
+        delegate?.didChangeGeneration(generation: pokemonGenerations[generationIndex])
         removeFromSuperview()
     }
 }
 
+//MARK: - ViewConfiguration
 extension PokemonGenerationPickerView: ViewConfiguration {
     func buildViewHierarchy() {
         addSubViews(views: [picker, closeButton])
@@ -82,6 +88,7 @@ extension PokemonGenerationPickerView: ViewConfiguration {
     }
 }
 
+//MARK: - UIPickerViewDataSource
 extension PokemonGenerationPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -92,6 +99,7 @@ extension PokemonGenerationPickerView: UIPickerViewDataSource {
     }
 }
 
+//MARK: - UIPickerViewDelegate
 extension PokemonGenerationPickerView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pokemonGenerations[row]

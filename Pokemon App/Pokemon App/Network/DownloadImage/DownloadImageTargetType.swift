@@ -13,6 +13,7 @@ enum DownloadImageTargetType {
     case getPokemonWithURL(URL)
 }
 
+//MARK: - TargetType
 extension DownloadImageTargetType: TargetType {
     var endpoint: String {
         switch self {

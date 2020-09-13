@@ -8,12 +8,14 @@
 import UIKit
 
 final class PokemonDetailsViewModel {
+    //MARK: - Private properties
     private let service: PokemonDetailsService & PokemonDetailsCoreDataOperations
     private let imageDownloader: DownloadImageViewModel
     private let pokemonName: String
     private var pokemonModel: PokemonDetailsModel?
     private var imageData: Data?
     
+    //MARK: - Initialization
     init(
         service: PokemonDetailsService & PokemonDetailsCoreDataOperations = PokemonDetailsServiceImpl(),
         imageDownloader: DownloadImageViewModel = DownloadImageViewModel.shared,
@@ -24,12 +26,14 @@ final class PokemonDetailsViewModel {
         self.pokemonName = pokemonName
     }
     
+    //MARK: - Private methods
     private func setupErrorMessage() -> UIImage {
         guard let errorImage = UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate) else { return UIImage() }
         imageData = errorImage.pngData()
         return errorImage
     }
     
+    //MARK: - Public methods
     func getPokemon(completion: @escaping(_ model: PokemonDetailsModel?) -> Void) {
         service.getPokemon(pokemonName: pokemonName) { [weak self] model, error in
             guard let model = model else {

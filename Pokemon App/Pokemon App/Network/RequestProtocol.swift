@@ -16,6 +16,7 @@ public protocol RequestProtocol {
 }
 
 class ProviderType<Target: TargetType> : RequestProtocol {
+    //MARK: - Public methods
     func requestObject<Model>(model: Model.Type, _ target: Target, completionHandler: @escaping (Model?, Error?) -> Void) where Model : Codable {
         guard var url = URLComponents(string: "\(target.baseURL)\(target.endpoint)") else {
             completionHandler(nil, NSError())

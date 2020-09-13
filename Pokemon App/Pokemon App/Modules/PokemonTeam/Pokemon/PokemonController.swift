@@ -9,9 +9,11 @@
 import UIKit
 
 final class PokemonController: UIViewController {
+    //MARK: - Private properties
     private let customView = PokemonView()
     private let viewModel: PokemonViewModel
     
+    //MARK: - Overrides
     override func loadView() {
         super.loadView()
         view = customView
@@ -22,6 +24,7 @@ final class PokemonController: UIViewController {
         customView.setupInfos(with: viewModel.getPokemonInfos())
     }
     
+    //MARK: - Initialization
     init(model: PokemonModel) {
         self.viewModel = PokemonViewModel(pokemon: model)
         super.init(nibName: nil, bundle: nil)
@@ -32,6 +35,7 @@ final class PokemonController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Private methods
     @objc private func removePokemonFromTeam() {
         let alert = UIAlertController(title: "Remove \(viewModel.getPokemonName()) from your team?", message: nil, preferredStyle: .alert)
         let removePokemonAction = UIAlertAction(title: "Remove", style: .destructive) { [weak self] _ in

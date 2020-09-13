@@ -11,13 +11,15 @@ protocol PokemonTeamGeneralService {
 }
 
 final class PokemonTeamGeneralServiceImpl: PokemonTeamGeneralService {
+    //MARK: - Private properties
+    private let coreDataManager: DBPokemonManager
     
-    let coreDataManager: DBPokemonManager
-    
+    //MARK: - Initialization
     init(coreDataManager: DBPokemonManager = DBPokemonManager()) {
         self.coreDataManager = coreDataManager
     }
     
+    //MARK: - Public methods
     func getAllPokemons() -> [DBPokemon] {
         return coreDataManager.getPokemons()
     }

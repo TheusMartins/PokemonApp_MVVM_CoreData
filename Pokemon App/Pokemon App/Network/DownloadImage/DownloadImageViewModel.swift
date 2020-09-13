@@ -9,13 +9,18 @@
 import UIKit
 
 final class DownloadImageViewModel {
-    private let service: DownloadImageService
+    //MARK: - Static properties
     static var shared = DownloadImageViewModel()
     
+    //MARK: - Private properties
+    private let service: DownloadImageService
+    
+    //MARK: - Initialization
     init(service: DownloadImageService = DownloadImageServiceImpl()) {
         self.service = service
     }
     
+    //MARK: - Public methods
     func getPokemonImage(id: String, completion: @escaping (UIImage?, Error?) -> Void) {
         service.getPokemon(pokemonId: "\(id).png") { data, error in
             guard let imageData = data else {

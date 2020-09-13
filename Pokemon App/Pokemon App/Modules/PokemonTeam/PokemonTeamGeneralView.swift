@@ -9,8 +9,10 @@
 import UIKit
 
 final class PokemonTeamGeneralView: UIView {
+    //MARK: - Private properties
     private let scrollView = UIScrollView()
     
+    //MARK: - Public properties
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 24
@@ -18,6 +20,7 @@ final class PokemonTeamGeneralView: UIView {
         return stackView
     }()
     
+    //MARK: - Initialization
     init() {
         super.init(frame: .zero)
         setupViewConfiguration()
@@ -28,6 +31,7 @@ final class PokemonTeamGeneralView: UIView {
     }
 }
 
+//MARK: - ViewConfiguration
 extension PokemonTeamGeneralView: ViewConfiguration {
     func buildViewHierarchy() {
         addSubViews(views: [scrollView])

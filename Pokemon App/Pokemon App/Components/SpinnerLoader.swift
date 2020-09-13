@@ -8,27 +8,29 @@
 
 import UIKit
 
-open class Spinner: UIView {
+final class Spinner: UIView {
+    //MARK: - Private properties
+    private(set) var isAnimating = false
 
     private let circleLayer: CAShapeLayer = {
         let circleLayer = CAShapeLayer()
         circleLayer.fillColor = nil
         circleLayer.lineWidth = 3
-        circleLayer.strokeColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         circleLayer.strokeStart = 0
         circleLayer.strokeEnd = 0
         circleLayer.lineCap = CAShapeLayerLineCap.round
         return circleLayer
     }()
 
-    public var color: UIColor = .white {
+    //MARK: - Public properties
+    var color: UIColor = .white {
         didSet {
             self.circleLayer.strokeColor = self.color.cgColor
         }
     }
-    open private(set) var isAnimating = false
-
-    public init() {
+    
+    //MARK: - Initialization
+    init() {
         super.init(frame: .zero)
         self.layer.addSublayer(circleLayer)
     }
@@ -37,7 +39,8 @@ open class Spinner: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    open override func layoutSubviews() {
+    //MARK: - Overrides
+    override func layoutSubviews() {
         super.layoutSubviews()
 
         if self.circleLayer.frame != self.bounds {
@@ -45,7 +48,8 @@ open class Spinner: UIView {
         }
     }
 
-    open func updateCircleLayer() {
+    //MARK: - Private methods
+    private func updateCircleLayer() {
         let center = CGPoint(x: self.bounds.size.width / 2.0, y: self.bounds.size.height / 2.0)
         let radius = (self.bounds.height - self.circleLayer.lineWidth) / 2.0
 
@@ -62,7 +66,8 @@ open class Spinner: UIView {
         self.circleLayer.frame = self.bounds
     }
 
-    open func startAnimation() {
+    //MARK: - Public methods
+    func startAnimation() {
 
         guard !isAnimating else { return }
         self.isAnimating = true
@@ -113,7 +118,7 @@ open class Spinner: UIView {
         self.circleLayer.add(animations, forKey: "animations")
     }
 
-    public func stopAnimating () {
+    func stopAnimating () {
         self.isAnimating = false
         self.circleLayer.removeAnimation(forKey: "animations")
     }

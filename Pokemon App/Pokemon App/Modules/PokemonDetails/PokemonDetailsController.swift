@@ -9,9 +9,22 @@
 import UIKit
 
 final class PokemonDetailsController: UIViewController {
+    //MARK: - Private properties
     private let viewModel: PokemonDetailsViewModel
     private let customView = PokemonDetailsView()
     
+    //MARK: - Initialization
+    init(pokemonName: String) {
+        self.viewModel = PokemonDetailsViewModel(pokemonName: pokemonName)
+        super.init(nibName: nil, bundle: nil)
+        self.setupTitle(pokemonName)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Overrides
     override func loadView() {
         super.loadView()
         view = customView
@@ -29,16 +42,7 @@ final class PokemonDetailsController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    init(pokemonName: String) {
-        self.viewModel = PokemonDetailsViewModel(pokemonName: pokemonName)
-        super.init(nibName: nil, bundle: nil)
-        self.setupTitle(pokemonName)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    //MARK: - Private methods
     private func loadPokemonInfos() {
         customView.setLoading(isLoading: true)
         DispatchQueue.main.async { [weak self] in

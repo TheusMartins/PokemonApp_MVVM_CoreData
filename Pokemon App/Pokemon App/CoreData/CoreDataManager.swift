@@ -9,12 +9,13 @@
 import CoreData
 
 final class CoreDataManager {
+    //MARK: - Static properties
     static let shared = CoreDataManager()
     
-    private init() {
-        
-    }
+    //MARK: - Private Init
+    private init() { }
     
+    //MARK: - Public properties
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Pokemon_app")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -25,7 +26,7 @@ final class CoreDataManager {
         return container
     }()
 
-    // MARK: - Core Data Saving support
+    // MARK: - Public methods
 
     func saveContext () {
         let context = persistentContainer.viewContext

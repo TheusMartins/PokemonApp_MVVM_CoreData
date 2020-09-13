@@ -9,7 +9,7 @@
 import UIKit
 
 final class PokemonView: UIView {
-    
+    //MARK: - Private properties
     private let pokemonInfosStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -49,6 +49,7 @@ final class PokemonView: UIView {
         return label
     }()
     
+    //MARK: - Public methods
     let trashButton: UIButton = {
         let button = UIButton()
         button.isUserInteractionEnabled = true
@@ -58,6 +59,7 @@ final class PokemonView: UIView {
         return button
     }()
     
+    //MARK: - Initialization
     init() {
         super.init(frame: .zero)
         setupViewConfiguration()
@@ -67,6 +69,7 @@ final class PokemonView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Public methods
     func setupInfos(with model: PokemonModel) {
         DispatchQueue.main.async {
             self.nationalDexIdLabel.text = "National dex number: \(model.id)"
@@ -80,6 +83,7 @@ final class PokemonView: UIView {
     }
 }
 
+//MARK: - ViewConfiguration
 extension PokemonView: ViewConfiguration {
     func buildViewHierarchy() {
         addSubViews(views: [

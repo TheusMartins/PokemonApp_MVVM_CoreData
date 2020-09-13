@@ -11,12 +11,15 @@ protocol PokemonService {
 }
 
 final class PokemonServiceImpl: PokemonService {
-    let coreDataManager: DBPokemonManager
+    //MARK: - Private properties
+    private let coreDataManager: DBPokemonManager
     
+    //MARK: - Initialization
     init(coreDataManager: DBPokemonManager = DBPokemonManager()) {
         self.coreDataManager = coreDataManager
     }
     
+    //MARK: - Public methods
     func removeFromTeam(id: Int32) {
         coreDataManager.deletePokemon(pokemonId: id)
     }

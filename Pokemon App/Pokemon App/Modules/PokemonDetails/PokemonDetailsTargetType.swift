@@ -12,6 +12,7 @@ enum PokemonDetailsTargetType {
     case getPokemonDetails(String)
 }
 
+//MARK: - TargetType
 extension PokemonDetailsTargetType: TargetType {
     var endpoint: String {
         switch self {

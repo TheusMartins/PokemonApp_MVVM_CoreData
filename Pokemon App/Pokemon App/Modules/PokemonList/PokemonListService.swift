@@ -10,15 +10,19 @@ protocol PokemonListService {
     func getPokemons(limit: Int, offset: Int, completion: @escaping (PokemonListModel?, Error?) -> Void)
 }
 
-class PokemonListServiceImpl: PokemonListService {
+final class PokemonListServiceImpl: PokemonListService {
+    //MARK: - Typealias
     typealias Target = PokemonListTargetType
     
+    //MARK: - Private properties
     private var provider: ProviderType<Target>
     
+    //MARK: - Initialization
     init(provider: ProviderType<Target> = ProviderType<Target>()) {
         self.provider = provider
     }
     
+    //MARK: - Public methods
     func getPokemons(limit: Int, offset: Int, completion: @escaping (PokemonListModel?, Error?) -> Void) {
         provider.requestObject(model: PokemonListModel.self, .getContacts(limit, offset)) { modelList, error in
             if let error = error {

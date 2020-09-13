@@ -9,6 +9,7 @@
 import UIKit
 
 class PokemonCell: UITableViewCell {
+    //MARK: - Private properties
     private let pokemonImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.layer.cornerRadius = 26
@@ -23,6 +24,7 @@ class PokemonCell: UITableViewCell {
         return label
     }()
     
+    //MARK: - Initialization
    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViewConfiguration()
@@ -32,6 +34,14 @@ class PokemonCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Overrides
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pokemonImage.hideLoading()
+        pokemonImage.image = nil
+    }
+    
+    //MARK: - Public methods
     func setupInfos(with pokemon: Pokemon, pokemonIndex: Int) {
         pokemonImage.image = nil
         pokemonName.text = pokemon.name.capitalized
@@ -43,14 +53,9 @@ class PokemonCell: UITableViewCell {
         pokemonImage.hideLoading()
         pokemonImage.image = image
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        pokemonImage.hideLoading()
-        pokemonImage.image = nil
-    }
 }
 
+//MARK: - ViewConfiguration
 extension PokemonCell: ViewConfiguration {
     func buildViewHierarchy() {
         addSubViews(views: [pokemonImage, pokemonName])

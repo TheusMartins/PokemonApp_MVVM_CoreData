@@ -9,7 +9,7 @@
 import UIKit
 
 final class PokemonDetailsView: UIView {
-    
+    //MARK: - Private properties
     private let pokemonInfosStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -55,6 +55,7 @@ final class PokemonDetailsView: UIView {
         return loader
     }()
     
+    //MARK: - Public properties
     let addPokemonButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .primaryColor
@@ -63,6 +64,7 @@ final class PokemonDetailsView: UIView {
         return button
     }()
     
+    //MARK: - Initialization
     init() {
         super.init(frame: .zero)
         setupViewConfiguration()
@@ -72,6 +74,7 @@ final class PokemonDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Public methods
     func setupInfos(with model: PokemonDetailsModel) {
         DispatchQueue.main.async { [weak self] in
             self?.nationalDexIdLabel.text = "National dex id: \(model.id)"
@@ -100,6 +103,7 @@ final class PokemonDetailsView: UIView {
     }
 }
 
+//MARK: - ViewConfiguration
 extension PokemonDetailsView: ViewConfiguration {
     func buildViewHierarchy() {
         addSubViews(views: [

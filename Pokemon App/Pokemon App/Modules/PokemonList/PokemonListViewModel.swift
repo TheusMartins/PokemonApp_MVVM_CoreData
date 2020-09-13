@@ -9,6 +9,7 @@
 import UIKit
 
 final class PokemonListViewModel {
+    //MARK: - Private properties
     private let pokemonGenerationRanges: [(limit: Int, offset: Int)] = [
         (limit: 151, offset: 0),
         (limit: 100, offset: 151),
@@ -23,6 +24,7 @@ final class PokemonListViewModel {
     private let service: PokemonListService
     private let imageDownloader: DownloadImageViewModel
     
+    //MARK: - Initialization
     init(
         service: PokemonListService = PokemonListServiceImpl(),
         imageDownloader: DownloadImageViewModel = DownloadImageViewModel.shared
@@ -31,6 +33,7 @@ final class PokemonListViewModel {
         self.imageDownloader = imageDownloader
     }
     
+    //MARK: - Public methods
     func getPokemons(generationIndex: Int, completion: @escaping(_ error: Error?) -> Void) {
         let generation =  pokemonGenerationRanges[generationIndex]
         service.getPokemons(limit: generation.limit, offset: generation.offset) { [weak self] modelList, error in

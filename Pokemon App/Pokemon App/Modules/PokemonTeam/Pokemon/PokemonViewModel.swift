@@ -7,9 +7,11 @@
 //
 
 final class PokemonViewModel {
+    //MARK: - Private properties
     private let service: PokemonService
     private let pokemon: PokemonModel
     
+    //MARK: - Initialization
     init(
         service: PokemonService = PokemonServiceImpl(),
         pokemon: PokemonModel
@@ -18,6 +20,7 @@ final class PokemonViewModel {
         self.pokemon = pokemon
     }
     
+    //MARK: - Public methods
     func removePokemonFromTeam(completion: @escaping(_ feedbackMessage: String) -> Void) {
         service.removeFromTeam(id: pokemon.id)
         completion("\(pokemon.name?.capitalized ?? "") has been removed from your team")

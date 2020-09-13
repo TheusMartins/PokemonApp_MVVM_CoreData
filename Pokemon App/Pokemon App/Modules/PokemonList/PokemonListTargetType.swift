@@ -10,6 +10,7 @@ enum PokemonListTargetType {
     case getContacts(Int, Int)
 }
 
+//MARK: - TargetType
 extension PokemonListTargetType: TargetType {
     var endpoint: String {
         return ""

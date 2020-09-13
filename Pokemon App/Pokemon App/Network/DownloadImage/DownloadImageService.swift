@@ -13,17 +13,19 @@ protocol DownloadImageService {
     func getPokemon(pokemonId: String, completion: @escaping (Data?, Error?) -> Void)
 }
 
-class DownloadImageServiceImpl: DownloadImageService {
-    
-    
+final class DownloadImageServiceImpl: DownloadImageService {
+    //MARK: - Typealias
     typealias Target = DownloadImageTargetType
     
+    //MARK: - Private properties
     private var provider: ProviderType<Target>
     
+    //MARK: - Initialization
     init(provider: ProviderType<Target> = ProviderType<Target>()) {
         self.provider = provider
     }
     
+    //MARK: - Public methods
     func getPokemon(url: URL, completion: @escaping (Data?, Error?) -> Void) {
         provider.requestData(target: .getPokemonWithURL(url)) { data, error in
             if let error = error {

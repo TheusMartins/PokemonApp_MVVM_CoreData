@@ -17,8 +17,7 @@ private class PokemonDetailsServiceMock: PokemonDetailsService, PokemonDetailsCo
     let pokemon = PokemonDetailsModel(id: 1,
                                       name: "bulbasaur",
                                       sprites: PokemonSprites(
-                                        front: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")!,
-                                        back: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png")!),
+                                        front: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")!),
                                       types: [
                                         PokemonType(type: Type(name: "grass"))
     ])

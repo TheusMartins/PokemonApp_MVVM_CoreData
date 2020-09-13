@@ -7,12 +7,15 @@
 //
 
 final class PokemonTeamGeneralViewModel {
+    //MARK: - Private properties
     private let service: PokemonTeamGeneralService
     
+    //MARK: - Initialization
     init(service: PokemonTeamGeneralService = PokemonTeamGeneralServiceImpl()) {
         self.service = service
     }
     
+    //MARK: - Public methods
     func getAllLocalPokemons() -> [DBPokemon] {
         return service.getAllPokemons()
     }

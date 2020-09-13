@@ -9,6 +9,7 @@
 import Foundation
 
 extension Data {
+    //MARK: - Support method, to debug requests
     func mapToJSON() throws -> Any {
         do {
             return try JSONSerialization.jsonObject(with: self, options: [])

@@ -10,7 +10,7 @@
 import UIKit
 
 final class PokemonListView: UIView {
-    var searchTextFieldTop: NSLayoutConstraint?
+    //MARK: - Private properties
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Select generation"
@@ -33,6 +33,9 @@ final class PokemonListView: UIView {
         return loader
     }()
     
+    //MARK: - Public properties
+    var tableViewTopAnchor: NSLayoutConstraint?
+    
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .projectBlack
@@ -44,6 +47,7 @@ final class PokemonListView: UIView {
     
     let picker: PokemonGenerationPickerView
     
+    //MARK: - Initialization
     init(
         dataSource: UITableViewDataSource,
         delegate: UITableViewDelegate,
@@ -51,7 +55,7 @@ final class PokemonListView: UIView {
     ) {
         picker = PokemonGenerationPickerView(delegate: pokemonGenerationPickerDelegate)
         super.init(frame: .zero)
-        searchTextFieldTop = tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 60)
+        tableViewTopAnchor = tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 60)
         tableView.dataSource = dataSource
         tableView.delegate = delegate
         setupViewConfiguration()
@@ -61,6 +65,7 @@ final class PokemonListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Private methods
     private func registerCells() {
         tableView.register(PokemonCell.self, forCellReuseIdentifier: PokemonCell.reuseIdentifier)
     }
@@ -79,6 +84,7 @@ final class PokemonListView: UIView {
         ])
     }
     
+    //MARK: - Public methods
     func setLoading(isLoading: Bool) {
         DispatchQueue.main.async { [weak self] in
             self?.spinnerLoader.isHidden = !isLoading
@@ -86,15 +92,20 @@ final class PokemonListView: UIView {
             isLoading ? self?.spinnerLoader.startAnimation() : self?.spinnerLoader.stopAnimating()
         }
     }
+    
+    func setupGenerationTitle(title: String) {
+        titleLabel.text = title
+    }
 }
 
+//MARK: - ViewConfiguration
 extension PokemonListView: ViewConfiguration {
     func buildViewHierarchy() {
         addSubViews(views: [titleLabel, showPickerButton, tableView, spinnerLoader])
     }
     
     func setupConstraints() {
-        guard let searchTextFieldTop = searchTextFieldTop else { return }
+        guard let searchTextFieldTop = tableViewTopAnchor else { return }
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),

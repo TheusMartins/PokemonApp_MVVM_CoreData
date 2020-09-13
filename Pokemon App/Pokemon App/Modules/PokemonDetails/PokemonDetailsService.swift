@@ -17,12 +17,15 @@ protocol PokemonDetailsCoreDataOperations {
     func canAddPokemon(pokemonId: Int32) -> Bool
 }
 
-class PokemonDetailsServiceImpl: PokemonDetailsService, PokemonDetailsCoreDataOperations {
+final class PokemonDetailsServiceImpl: PokemonDetailsService, PokemonDetailsCoreDataOperations {
+    //MARK: - Tupealias
     typealias Target = PokemonDetailsTargetType
     
+    //MARK: - Private properties
     private var provider: ProviderType<Target>
-    let coreDataManager: DBPokemonManager
+    private let coreDataManager: DBPokemonManager
     
+    //MARK: - Initialization
     init(
         provider: ProviderType<Target> = ProviderType<Target>(),
         coreDataManager: DBPokemonManager = DBPokemonManager()
@@ -31,6 +34,7 @@ class PokemonDetailsServiceImpl: PokemonDetailsService, PokemonDetailsCoreDataOp
         self.coreDataManager = coreDataManager
     }
     
+    //MARK: - Public methods
     func getPokemon(pokemonName: String, completion: @escaping (PokemonDetailsModel?, Error?) -> Void) {
         provider.requestObject(model: PokemonDetailsModel.self, .getPokemonDetails(pokemonName)) { modelList, error in
             if let error = error {

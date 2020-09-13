@@ -9,10 +9,12 @@
 import UIKit
 
 final class PokemonTeamGeneralController: UIViewController {
+    //MARK: - Private properties
     private let customView = PokemonTeamGeneralView()
     private let viewModel = PokemonTeamGeneralViewModel()
     private var pokemonControllers: [PokemonController] = []
     
+    //MARK: - Overrides
     override func loadView() {
         super.loadView()
         view = customView
@@ -33,6 +35,7 @@ final class PokemonTeamGeneralController: UIViewController {
         updateTeam()
     }
     
+    //MARK: - Private methods
     private func addPokemons() {
         customView.stackView.removeArrangedSubviews()
         for controller in pokemonControllers {
