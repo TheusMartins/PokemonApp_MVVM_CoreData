@@ -24,6 +24,12 @@ final class PokemonDetailsViewModel {
         self.pokemonName = pokemonName
     }
     
+    private func setupErrorMessage() -> UIImage {
+        guard let errorImage = UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate) else { return UIImage() }
+        imageData = errorImage.pngData()
+        return errorImage
+    }
+    
     func getPokemon(completion: @escaping(_ model: PokemonDetailsModel?) -> Void) {
         service.getPokemon(pokemonName: pokemonName) { [weak self] model, error in
             guard let model = model else {
@@ -36,16 +42,18 @@ final class PokemonDetailsViewModel {
     }
     
     func getPokemonImage(completion: @escaping(_ front: UIImage, _ hasError: Bool) -> Void) {
-        guard let pokemonModel = pokemonModel else { return }
-        imageDownloader.getPokemonImage(url: pokemonModel.sprites.front) { [weak self] image, error in
+        guard let pokemonImageUrl = pokemonModel?.sprites.front else {
+            completion(setupErrorMessage(), true)
+            return
+        }
+        imageDownloader.getPokemonImage(url: pokemonImageUrl) { [weak self] image, error in
+            guard let self = self else { return }
             guard let image = image else {
-                let errorImage = UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate)
-                self?.imageData = errorImage?.pngData()
-                completion(errorImage!, true)
+                completion(self.setupErrorMessage(), true)
                 return
             }
             
-            self?.imageData = image.pngData()
+            self.imageData = image.pngData()
             completion(image, false)
         }
     }

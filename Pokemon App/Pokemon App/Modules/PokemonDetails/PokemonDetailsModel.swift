@@ -16,12 +16,10 @@ struct PokemonDetailsModel: Codable {
 }
 
 struct PokemonSprites: Codable {
-    let front: URL
-    let back: URL
+    let front: URL?
     
     enum CodingKeys: String, CodingKey {
         case front = "front_default"
-        case back = "back_default"
     }
 }
 
