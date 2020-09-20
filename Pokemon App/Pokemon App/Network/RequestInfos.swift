@@ -23,8 +23,6 @@ public protocol TargetType {
     
     var method: HTTPMethod { get }
     
-    var headers: [String: String]? { get }
-    
     var parameters: [String: Any]? { get }
 
 }
