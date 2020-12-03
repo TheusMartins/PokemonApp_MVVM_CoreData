@@ -24,28 +24,19 @@ class PokemonCell: UITableViewCell {
         return label
     }()
     
-    //MARK: - Initialization
-   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViewConfiguration()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     //MARK: - Overrides
     override func prepareForReuse() {
         super.prepareForReuse()
-        pokemonImage.hideLoading()
-        pokemonImage.image = nil
+        for view in subviews {
+            view.removeFromSuperview()
+        }
     }
     
     //MARK: - Public methods
     func setupInfos(with pokemon: Pokemon, pokemonIndex: Int) {
-        pokemonImage.image = nil
         pokemonName.text = pokemon.name.capitalized
         pokemonImage.showLoading()
+        setupViewConfiguration()
     }
     
     func setupImage(image: UIImage, hasError: Bool) {
