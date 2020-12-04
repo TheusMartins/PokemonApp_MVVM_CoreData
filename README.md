@@ -31,7 +31,7 @@ my approach was make a call to feed a list and another to download pokemon image
 
 ## Core data
 
-Simple layer of core data to storage you pokemon team
+Simple layer of core data to storage user's pokemon team
 
 ## View code
 
