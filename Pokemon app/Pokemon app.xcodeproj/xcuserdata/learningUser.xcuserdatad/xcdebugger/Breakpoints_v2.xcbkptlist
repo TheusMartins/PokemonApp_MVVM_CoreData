@@ -20,33 +20,33 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B91CDCE8-9172-4C41-B157-41D316702B7C - a53fc16d10755fc3"
+                  uuid = "B91CDCE8-9172-4C41-B157-41D316702B7C - ebbba3fe5596a4e4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Pokemon_app.PokemonDetailsViewModel.getPokemonImage(completion: (__C.UIImage, Swift.Bool) -&gt; ()) -&gt; ()"
                   moduleName = "Pokemon app"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/learningUser/Desktop/iOS%20Projects/Pokemon%20app/Pokemon%20app/Modules/PokemonDetails/PokemonDetailsViewModel.swift"
+                  urlString = "file:///Users/learningUser/Desktop/PokemonApp/Pokemon%20app/Pokemon%20app/Modules/PokemonDetails/PokemonDetailsViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "657">
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "636">
                </Location>
                <Location
-                  uuid = "B91CDCE8-9172-4C41-B157-41D316702B7C - bfdface3f431b68f"
+                  uuid = "B91CDCE8-9172-4C41-B157-41D316702B7C - f15bce70b1d24da8"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Pokemon_app.PokemonDetailsViewModel.getPokemonImage(completion: (__C.UIImage, Swift.Bool) -&gt; ()) -&gt; ()"
                   moduleName = "Pokemon app"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/learningUser/Desktop/iOS%20Projects/Pokemon%20app/Pokemon%20app/Modules/PokemonDetails/PokemonDetailsViewModel.swift"
+                  urlString = "file:///Users/learningUser/Desktop/PokemonApp/Pokemon%20app/Pokemon%20app/Modules/PokemonDetails/PokemonDetailsViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "238">
                </Location>
             </Locations>
@@ -119,16 +119,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DB8CED62-EF97-4EB1-93CC-E1E0E6CCDD3D"
+            uuid = "4AD11D22-FE73-42CD-8F7F-37BC9A5396AD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pokemon app/Network/RequestProtocol.swift"
+            filePath = "Pokemon app/Modules/PokemonList/PokemonListCell/PokemonCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "requestObject(model:_:completionHandler:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "setupInfos(with:pokemonIndex:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

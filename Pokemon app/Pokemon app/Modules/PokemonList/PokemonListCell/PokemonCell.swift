@@ -27,13 +27,13 @@ class PokemonCell: UITableViewCell {
     //MARK: - Overrides
     override func prepareForReuse() {
         super.prepareForReuse()
-        for view in subviews {
-            view.removeFromSuperview()
-        }
+        pokemonImage.removeFromSuperview()
+        pokemonName.removeFromSuperview()
     }
     
     //MARK: - Public methods
     func setupInfos(with pokemon: Pokemon, pokemonIndex: Int) {
+        pokemonImage.image = nil
         pokemonName.text = pokemon.name.capitalized
         pokemonImage.showLoading()
         setupViewConfiguration()
