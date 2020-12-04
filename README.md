@@ -16,7 +16,7 @@ you access this screen by tapping on Team tabBar
 
 ## App was build on MVVM Pattern, where: 
 
-- Model: layer that has properties that will feed our screens
+- Model: layer that has properties that will feed screens
 - View: Layer that build screens that user will see
 - ViewModel: Layer that feed View with infos and where logic should be
 
