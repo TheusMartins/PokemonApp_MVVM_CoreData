@@ -26,13 +26,17 @@ class ProviderType<Target: TargetType> : RequestProtocol {
         var components: [URLQueryItem] = []
         
         target.parameters?.forEach({ key, value in
-            guard let stringValue = value as? Int else { return }
-            components.append(URLQueryItem(name: key, value: "\(stringValue)"))
+            components.append(URLQueryItem(name: key, value: "\(value)"))
         })
         
         url.queryItems = components
         
-        URLSession.shared.dataTask(with: url.url!) { data, resp, error in
+        guard let finalURL = url.url else {
+            completionHandler(.failure(NSError()))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: finalURL) { data, resp, error in
             if let error = error {
                 completionHandler(.failure(error))
             }
@@ -60,13 +64,17 @@ class ProviderType<Target: TargetType> : RequestProtocol {
         var components: [URLQueryItem] = []
         
         target.parameters?.forEach({ key, value in
-            guard let stringValue = value as? Int else { return }
-            components.append(URLQueryItem(name: key, value: "\(stringValue)"))
+            components.append(URLQueryItem(name: key, value: "\(value)"))
         })
         
         url.queryItems = components
         
-        URLSession.shared.dataTask(with: url.url!) { data, resp, error in
+        guard let finalURL = url.url else {
+            completionHandler(.failure(NSError()))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: finalURL) { data, resp, error in
             if let error = error {
                 completionHandler(.failure(error))
             }
