@@ -24,12 +24,11 @@ final class DownloadImageViewModelTest: XCTestCase {
         service.shouldThrowError = false
         var hasError: Bool = true
         var idSent: String?
-        sut.getPokemonImage(id: "1") { [weak self] _, error  in
+        sut.getPokemonImage(id: "1") { [weak self] response in
             idSent = self?.service.idSent
-            if let _ = error {
-                hasError = true
-            } else {
-                hasError = false
+            switch response {
+            case .success: hasError = false
+            case .failure: hasError = true
             }
         }
         
@@ -40,11 +39,10 @@ final class DownloadImageViewModelTest: XCTestCase {
     func testGetPokemonImageIdFailure() {
         service.shouldThrowError = true
         var hasError: Bool = false
-        sut.getPokemonImage(id: "1") { _, error  in
-            if let _ = error {
-                hasError = true
-            } else {
-                hasError = false
+        sut.getPokemonImage(id: "1") { response in
+            switch response {
+            case .success: hasError = false
+            case .failure: hasError = true
             }
         }
         
@@ -55,12 +53,11 @@ final class DownloadImageViewModelTest: XCTestCase {
         service.shouldThrowError = false
         var hasError: Bool = true
         var idSent: String?
-        sut.getPokemonImage(url: URL(string: "google.com")!) { [weak self] _, error  in
+        sut.getPokemonImage(url: URL(string: "google.com")!) { [weak self] response in
             idSent = self?.service.urlSent
-            if let _ = error {
-                hasError = true
-            } else {
-                hasError = false
+            switch response {
+            case .success: hasError = false
+            case .failure: hasError = true
             }
         }
         
@@ -71,11 +68,10 @@ final class DownloadImageViewModelTest: XCTestCase {
     func testGetPokemonImageUrlFailure() {
         service.shouldThrowError = true
         var hasError: Bool = false
-        sut.getPokemonImage(url: URL(string: "google.com")!) { _, error  in
-            if let _ = error {
-                hasError = true
-            } else {
-                hasError = false
+        sut.getPokemonImage(url: URL(string: "google.com")!) { response in
+            switch response {
+            case .success: hasError = false
+            case .failure: hasError = true
             }
         }
         

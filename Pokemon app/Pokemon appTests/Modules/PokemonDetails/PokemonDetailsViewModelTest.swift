@@ -22,8 +22,8 @@ private class PokemonDetailsServiceMock: PokemonDetailsService, PokemonDetailsCo
                                         PokemonType(type: Type(name: "grass"))
     ])
     
-    func getPokemon(pokemonName: String, completion: @escaping (PokemonDetailsModel?, Error?) -> Void) {
-        shouldThrowError ? completion(nil, NSError()) : completion(pokemon, nil)
+    func getPokemon(pokemonName: String, completion: @escaping (Result<PokemonDetailsModel, Error>) -> Void) {
+        shouldThrowError ? completion(.failure(NSError())) : completion(.success(pokemon))
     }
     
     func addPokemon(model: PokemonDetailsModel, imageData: Data?) {

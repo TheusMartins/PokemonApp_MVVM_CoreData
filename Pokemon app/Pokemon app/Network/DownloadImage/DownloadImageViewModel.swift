@@ -26,7 +26,7 @@ final class DownloadImageViewModel {
             switch apiResponse {
             case .success(let imageData):
                 guard let image = UIImage(data: imageData) else {
-                    completion(.failure(NSError()))
+                    completion(.success(UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate) ?? UIImage()))
                     return
                 }
                 completion(.success(image))
@@ -40,7 +40,7 @@ final class DownloadImageViewModel {
             switch apiResponse {
             case .success(let imageData):
                 guard let image = UIImage(data: imageData) else {
-                    completion(.failure(NSError()))
+                    completion(.success(UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate) ?? UIImage()))
                     return
                 }
                 completion(.success(image))

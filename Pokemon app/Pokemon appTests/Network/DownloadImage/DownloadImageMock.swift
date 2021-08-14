@@ -14,13 +14,14 @@ final class DownloadImageMock: DownloadImageService {
     var idSent = ""
     var urlSent = ""
     
-    func getPokemon(url: URL, completion: @escaping (Data?, Error?) -> Void) {
+    func getPokemon(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         urlSent = url.absoluteString
-        shouldThrowError ? completion(nil, NSError()) : completion(Data(), nil)
+        shouldThrowError ? completion(.failure(NSError())) : completion(.success(Data()))
     }
     
-    func getPokemon(pokemonId: String, completion: @escaping (Data?, Error?) -> Void) {
+    func getPokemon(pokemonId: String, completion: @escaping (Result<Data, Error>) -> Void) {
         idSent = pokemonId
-        shouldThrowError ? completion(nil, NSError()) : completion(Data(), nil)
+        shouldThrowError ? completion(.failure(NSError())) :
+            completion(.success(Data()))
     }
 }

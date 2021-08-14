@@ -18,8 +18,8 @@ private class PokemonListServiceMock: PokemonListService {
         Pokemon(name: "venusaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/3/")!)
     ])
     
-    func getPokemons(limit: Int, offset: Int, completion: @escaping (PokemonListModel?, Error?) -> Void) {
-        shouldThrowError ? completion(nil, NSError()) : completion(pokemonlist, nil)
+    func getPokemons(limit: Int, offset: Int, completion: @escaping (Result<PokemonListModel, Error>) -> Void) {
+        shouldThrowError ? completion(.failure(NSError())) : completion(.success(pokemonlist))
     }
 }
 
