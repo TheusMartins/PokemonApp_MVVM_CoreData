@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PokemonDetailsService {
-    func getPokemon(pokemonName: String, completion: @escaping (PokemonDetailsModel?, Error?) -> Void)
+    func getPokemon(pokemonName: String, completion: @escaping (Result<PokemonDetailsModel, Error>) -> Void)
 }
 
 protocol PokemonDetailsCoreDataOperations {
@@ -35,12 +35,11 @@ final class PokemonDetailsServiceImpl: PokemonDetailsService, PokemonDetailsCore
     }
     
     //MARK: - Public methods
-    func getPokemon(pokemonName: String, completion: @escaping (PokemonDetailsModel?, Error?) -> Void) {
-        provider.requestObject(model: PokemonDetailsModel.self, .getPokemonDetails(pokemonName)) { modelList, error in
-            if let error = error {
-                completion(nil, error)
-            } else {
-                completion(modelList, nil)
+    func getPokemon(pokemonName: String, completion: @escaping (Result<PokemonDetailsModel, Error>) -> Void) {
+        provider.requestObject(model: PokemonDetailsModel.self, .getPokemonDetails(pokemonName)) { apiResponse in
+            switch apiResponse {
+            case .success(let pokemonDetails): completion(.success(pokemonDetails))
+            case .failure(let error): completion(.failure(error))
             }
         }
     }

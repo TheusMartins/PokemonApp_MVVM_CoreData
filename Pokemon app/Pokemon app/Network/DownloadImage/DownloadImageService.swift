@@ -9,8 +9,8 @@
 import Foundation
 
 protocol DownloadImageService {
-    func getPokemon(url: URL, completion: @escaping (Data?, Error?) -> Void)
-    func getPokemon(pokemonId: String, completion: @escaping (Data?, Error?) -> Void)
+    func getPokemon(url: URL, completion: @escaping (Result<Data, Error>) -> Void)
+    func getPokemon(pokemonId: String, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
 final class DownloadImageServiceImpl: DownloadImageService {
@@ -26,22 +26,20 @@ final class DownloadImageServiceImpl: DownloadImageService {
     }
     
     //MARK: - Public methods
-    func getPokemon(url: URL, completion: @escaping (Data?, Error?) -> Void) {
-        provider.requestData(target: .getPokemonWithURL(url)) { data, error in
-            if let error = error {
-                completion(nil, error)
-            } else {
-                completion(data, nil)
+    func getPokemon(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
+        provider.requestData(target: .getPokemonWithURL(url)) { apiResponse in
+            switch apiResponse {
+            case .success(let imageData): completion(.success(imageData))
+            case .failure(let error): completion(.failure(error))
             }
         }
     }
     
-    func getPokemon(pokemonId: String, completion: @escaping (Data?, Error?) -> Void) {
-        provider.requestData(target: .getPokemonWithId(pokemonId)) { data, error in
-            if let error = error {
-                completion(nil, error)
-            } else {
-                completion(data, nil)
+    func getPokemon(pokemonId: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        provider.requestData(target: .getPokemonWithId(pokemonId)) { apiResponse in
+            switch apiResponse {
+            case .success(let imageData): completion(.success(imageData))
+            case .failure(let error): completion(.failure(error))
             }
         }
     }

@@ -11,15 +11,15 @@ import Foundation
 public protocol RequestProtocol {
     associatedtype
     Target: TargetType
-    func requestObject<Model: Codable>(model: Model.Type, _ target: Target, completionHandler: @escaping (_ result: Model?, _ error: Error?) -> Void)
-    func requestData(target: Target, completionHandler: @escaping (_ data: Data?, _ error: Error?) -> Void)
+    func requestObject<Model: Codable>(model: Model.Type, _ target: Target, completionHandler: @escaping (Result<Model, Error>) -> Void)
+    func requestData(target: Target, completionHandler: @escaping (Result<Data, Error>) -> Void)
 }
 
 class ProviderType<Target: TargetType> : RequestProtocol {
     //MARK: - Public methods
-    func requestObject<Model>(model: Model.Type, _ target: Target, completionHandler: @escaping (Model?, Error?) -> Void) where Model : Codable {
+    func requestObject<Model>(model: Model.Type, _ target: Target, completionHandler: @escaping (Result<Model, Error>) -> Void) where Model : Codable {
         guard var url = URLComponents(string: "\(target.baseURL)\(target.endpoint)") else {
-            completionHandler(nil, NSError())
+            completionHandler(.failure(NSError()))
             return
         }
         
@@ -34,26 +34,26 @@ class ProviderType<Target: TargetType> : RequestProtocol {
         
         URLSession.shared.dataTask(with: url.url!) { data, resp, error in
             if let error = error {
-                completionHandler(nil, error)
+                completionHandler(.failure(error))
             }
             
             guard let data = data else {
-                completionHandler(nil, NSError())
+                completionHandler(.failure(NSError()))
                 return
             }
             
             do {
                 let modelList = try JSONDecoder().decode(Model.self , from: data)
-                completionHandler(modelList, nil)
+                completionHandler(.success(modelList))
             } catch {
-                completionHandler(nil, NSError())
+                completionHandler(.failure(NSError()))
             }
         }.resume()
     }
     
-    func requestData(target: Target, completionHandler: @escaping (_ data: Data?, _ error: Error?) -> Void) {
+    func requestData(target: Target, completionHandler: @escaping (Result<Data, Error>) -> Void) {
         guard var url = URLComponents(string: "\(target.baseURL)\(target.endpoint)") else {
-            completionHandler(nil, NSError())
+            completionHandler(.failure(NSError()))
             return
         }
         
@@ -68,15 +68,15 @@ class ProviderType<Target: TargetType> : RequestProtocol {
         
         URLSession.shared.dataTask(with: url.url!) { data, resp, error in
             if let error = error {
-                completionHandler(nil, error)
+                completionHandler(.failure(error))
             }
             
             guard let data = data else {
-                completionHandler(nil, NSError())
+                completionHandler(.failure(NSError()))
                 return
             }
             
-            completionHandler(data, nil)
+            completionHandler(.success(data))
 
         }.resume()
     }

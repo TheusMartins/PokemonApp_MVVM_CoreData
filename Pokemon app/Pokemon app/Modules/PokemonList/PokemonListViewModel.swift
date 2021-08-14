@@ -36,14 +36,14 @@ final class PokemonListViewModel {
     //MARK: - Public methods
     func getPokemons(generationIndex: Int, completion: @escaping(_ error: Error?) -> Void) {
         let generation =  pokemonGenerationRanges[generationIndex]
-        service.getPokemons(limit: generation.limit, offset: generation.offset) { [weak self] modelList, error in
-            guard let modelList = modelList else {
-                completion(error)
-                return
+        service.getPokemons(limit: generation.limit, offset: generation.offset) { [weak self] apiResponse in
+            switch apiResponse {
+            case .success(let pokemonList):
+                self?.dataSource = pokemonList.results
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UpdateInfos"), object: nil)
+                completion(nil)
+            case .failure(let error): completion(error)
             }
-            self?.dataSource = modelList.results
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UpdateInfos"), object: nil)
-            completion(nil)
         }
     }
     
@@ -61,14 +61,11 @@ final class PokemonListViewModel {
     
     func getImage(at index: Int, completion: @escaping(_ image: UIImage, _ hasError: Bool) -> Void) {
         let pokemonId = dataSource[index].url.absoluteString.split(whereSeparator: { $0 == "/"}).map(String.init).last
-        imageDownloader.getPokemonImage(id: pokemonId ?? "") { image, error in
-            guard let image = image else {
-                let errorImage = UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate)
-                completion(errorImage!, true)
-                return
+        imageDownloader.getPokemonImage(id: pokemonId ?? "") { apiResponse in
+            switch apiResponse {
+            case .success(let image): completion(image, false)
+            case .failure: completion(UIImage(named: "notFoundImage")?.withRenderingMode(.alwaysTemplate) ?? UIImage(), true)
             }
-            
-            completion(image, false)
         }
     }
 }

@@ -35,13 +35,13 @@ final class PokemonDetailsViewModel {
     
     //MARK: - Public methods
     func getPokemon(completion: @escaping(_ model: PokemonDetailsModel?) -> Void) {
-        service.getPokemon(pokemonName: pokemonName) { [weak self] model, error in
-            guard let model = model else {
-                completion(nil)
-                return
+        service.getPokemon(pokemonName: pokemonName) { [weak self] apiResponse in
+            switch apiResponse {
+            case .success(let pokemonDetails):
+                self?.pokemonModel = pokemonDetails
+                completion(pokemonDetails)
+            case .failure: completion(nil)
             }
-            self?.pokemonModel = model
-            completion(model)
         }
     }
     
@@ -50,15 +50,14 @@ final class PokemonDetailsViewModel {
             completion(setupErrorMessage(), true)
             return
         }
-        imageDownloader.getPokemonImage(url: pokemonImageUrl) { [weak self] image, error in
+        imageDownloader.getPokemonImage(url: pokemonImageUrl) { [weak self] apiResponse in
             guard let self = self else { return }
-            guard let image = image else {
-                completion(self.setupErrorMessage(), true)
-                return
-            }
-            
-            self.imageData = image.pngData()
-            completion(image, false)
+            switch apiResponse {
+            case .success(let image):
+                self.imageData = image.pngData()
+                completion(image, false)
+            case .failure: completion(self.setupErrorMessage(), true)
+          }
         }
     }
     

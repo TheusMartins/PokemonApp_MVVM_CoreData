@@ -21,31 +21,31 @@ final class DownloadImageViewModel {
     }
     
     //MARK: - Public methods
-    func getPokemonImage(id: String, completion: @escaping (UIImage?, Error?) -> Void) {
-        service.getPokemon(pokemonId: "\(id).png") { data, error in
-            guard let imageData = data else {
-                if let error = error {
-                    completion(nil, error)
+    func getPokemonImage(id: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        service.getPokemon(pokemonId: "\(id).png") { apiResponse in
+            switch apiResponse {
+            case .success(let imageData):
+                guard let image = UIImage(data: imageData) else {
+                    completion(.failure(NSError()))
+                    return
                 }
-                return
+                completion(.success(image))
+            case .failure(let error): completion(.failure(error))
             }
-            
-            let image = UIImage(data: imageData)
-            completion(image, nil)
         }
     }
     
-    func getPokemonImage(url: URL, completion: @escaping (UIImage?, Error?) -> Void) {
-        service.getPokemon(url: url) { data, error in
-            guard let imageData = data else {
-                if let error = error {
-                    completion(nil, error)
+    func getPokemonImage(url: URL, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        service.getPokemon(url: url) { apiResponse in
+            switch apiResponse {
+            case .success(let imageData):
+                guard let image = UIImage(data: imageData) else {
+                    completion(.failure(NSError()))
+                    return
                 }
-                return
+                completion(.success(image))
+            case .failure(let error): completion(.failure(error))
             }
-            
-            let image = UIImage(data: imageData)
-            completion(image, nil)
         }
     }
 }
